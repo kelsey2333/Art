@@ -15,17 +15,26 @@ import java.util.Scanner;
  **/
 public class homeworkday05 {
     public static void main(String[] args) {
-        //接收用户输入的一个数
+        //先判断一个数是不是质数
         Scanner scan = new Scanner(System.in);
-        System.out.println("请你输入一个数：");
-        int t = scan.nextInt();
-        System.out.println(2);
-        for (int i = 3;i<=t;i++){
-            for (int p=0;p<=t/10;p += 10){
-                System.out.println(i);
+        System.out.println("请您输入一个范围" + "2~");
+        int maxval = scan.nextInt();
+        int count = 0;
+        for (int num = 2; num <= maxval; num++) {
+            boolean isPrime = true;
+            for (int i = 2; i <= num -1 ; i++) {
+                if (num % i == 0) {
+                    isPrime = false;
+                    break;
+                }
             }
+                if (isPrime){
+                System.out.print(num+" ");
+                    count++;
+            }
+            if (count%10==0){
+                System.out.println();
         }
-
+        }
     }
-
 }
