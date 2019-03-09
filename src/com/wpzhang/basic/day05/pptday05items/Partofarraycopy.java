@@ -3,7 +3,7 @@
  * @Date 2019/3/7
  * @Description
  */
-package PPTDay05items;
+package com.wpzhang.basic.day05.pptday05items;
 
 /**
  * @program: Wpzhang day04
@@ -11,7 +11,7 @@ package PPTDay05items;
  * @author: wpzhang
  * @create: 2019-03-07 15:35
  **/
-public class partofarraycopy {
+public class Partofarraycopy {
     public static void main(String[] args) {
         int[] arr ={3, 2, 1, 5,4,3,2,1,};
         int[] arr2 = new int[9];//创建一个新的数组

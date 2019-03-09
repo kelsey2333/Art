@@ -3,7 +3,7 @@
  * @Date 2019/3/7
  * @Description
  */
-package Day04;
+package com.wpzhang.basic.day04;
 
 import java.util.Scanner;
 
@@ -22,11 +22,13 @@ public class Fractionplus {
         //以该整数做分母将分数进行相加
         double sum = 0;
         System.out.print(1);
-        for (int i = 2; i <= a ; i++) {
+        for (int i = 2; i <= a; i++) {
             System.out.print("+1/" + i);
         }
-        for (double i = 1; i <= a ; i++) {
-            sum +=1/i;
-        }System.out.print("=" + sum);
+        for (int i = 1; i <= a; i++) {
+          //  找到循环变量与循环执行体的关系
+            sum += 1.0 / i;
+        }
+        System.out.print("=" + sum);
     }
 }

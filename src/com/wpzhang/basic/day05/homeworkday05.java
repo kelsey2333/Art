@@ -3,7 +3,7 @@
  * @Date 2019/3/7
  * @Description
  */
-package Day05.homework;
+package com.wpzhang.basic.day05;
 
 import java.util.Scanner;
 

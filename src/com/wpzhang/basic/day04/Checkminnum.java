@@ -3,7 +3,7 @@
  * @Date 2019/3/8
  * @Description
  */
-package Day05.homework;
+package com.wpzhang.basic.day04;
 
 import java.util.Arrays;
 
