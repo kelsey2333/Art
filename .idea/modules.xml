@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Wpzhang.iml" filepath="$PROJECT_DIR$/Wpzhang.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wpzhang.iml" filepath="$PROJECT_DIR$/wpzhang.iml" />
     </modules>
   </component>
 </project>

@@ -3,10 +3,7 @@
  * @Date 2019/3/8
  * @Description
  */
-package com.wpzhang.basic.pptitemsday06;
-
-import java.util.Arrays;
-import java.util.Scanner;
+package com.wpzhang.basic.day06.pptitemsday06;
 
 /**
  * @program: Wpzhang
