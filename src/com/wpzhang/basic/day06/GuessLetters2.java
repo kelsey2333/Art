@@ -23,7 +23,6 @@ public class GuessLetters2 {
         for (int i = 0; i < arr.length; i++) {
             //将letters里的level个任意字母赋给arr
             int index = (int) (Math.random() * (level + 1));
-             arr[i]=letters[index];
         }//返回数组arr
         return arr;
     }
@@ -38,18 +37,18 @@ public class GuessLetters2 {
         Scanner scan2 = new Scanner(System.in);
         System.out.println("请输入字母：");
         String input = scan.next();
+        //字符转换为字符数组
         char[] arr2 = input.toCharArray();
         System.out.println(Arrays.toString(arr2));
         //比较用户输入字母与指定字母
         int count=0;
-        for (int i =arr.length-1;i>=0;i--){
-            for (int j =0 ; j<=i;j++) {
-                if (arr[i] == arr2[i]) {
+        for (int i =0;i<arr.length;i++){
+            for (int j =0 ; j<arr2.length;j++) {
+                if (arr[i] == arr2[j]) {
                     count++;
                 }
-            }System.out.println("你只答对了"+count+"个字母，继续加油！");
-
-        }
+            }
+        }System.out.println("你只答对了"+count+"个字母，继续加油！");
 
     }
 
