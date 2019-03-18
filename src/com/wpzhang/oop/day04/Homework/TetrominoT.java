@@ -3,7 +3,10 @@
  * @Date 2019/3/14
  * @Description
  */
-package com.wpzhang.oop.day04;
+package com.wpzhang.oop.day04.Homework;
+
+import com.wpzhang.oop.day04.Homework.Cell;
+import com.wpzhang.oop.day04.Homework.Tetromino;
 
 /**
  * @program: Wpzhang

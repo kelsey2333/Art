@@ -3,9 +3,7 @@
  * @Date 2019/3/14
  * @Description
  */
-package com.wpzhang.oop.day04;
-
-import com.wpzhang.oop.day03.*;
+package com.wpzhang.oop.day04.Homework;
 
 /**
  * @program: Wpzhang
