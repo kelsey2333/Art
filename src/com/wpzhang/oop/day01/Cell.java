@@ -3,7 +3,7 @@
  * @Date 2019/3/13
  * @Description
  */
-package com.wpzhang.com.wpzhang.oop.day02;
+package com.wpzhang.oop.day01;
 
 /**
  * @program: Wpzhang
