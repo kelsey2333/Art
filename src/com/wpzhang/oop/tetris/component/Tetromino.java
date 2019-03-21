@@ -13,7 +13,7 @@ import java.awt.*;
  * @author: wpzhang
  * @create: 2019-03-19 14:06
  **/
-public class Tetromino {
+public abstract class Tetromino {
     public Tetromino() {
         row = 1;
         col = 1;
@@ -42,6 +42,15 @@ public class Tetromino {
             // 循环移动4个积木单元格
             cells[i].drop();
         }
+        row++;
+    }
+    //为什么要对drop方法进行重写？因为当方块撞击到墙时需要回退一步
+    public void drop(int step ) {
+        for (int i = 0; i < cells.length; i++) {
+            // 循环移动4个积木单元格
+            cells[i].drop(step);
+        }
+        row += step;
     }
 
     public void moveLeft() {
@@ -50,12 +59,26 @@ public class Tetromino {
             cells[i].moveLeft();
         }
     }
+    public void moveLeft(int step) {
+        for (int i = 0; i < cells.length; i++) {
+            // 循环移动4个积木单元格
+            cells[i].moveLeft(step);
+        }
+        col -= step;
+    }
 
     public void moveRight() {
         for (int i = 0; i < cells.length; i++) {
             // 循环移动4个积木单元格
             cells[i].moveRight();
         }
+    }
+    public void moveRight(int step) {
+        for (int i = 0; i < cells.length; i++) {
+            // 循环移动4个积木单元格
+            cells[i].moveRight(step);
+        }
+        col += step;
     }
 
     /**
@@ -83,4 +106,23 @@ public class Tetromino {
             cells[i].paint(g, x, y);
         }
     }
+    /**
+     * @Param
+     * @description 翻转方法
+     * @date 2019/3/20 14:05
+     * @return
+     */
+
+
+    /*
+    知识点：由abstract修饰的方法是抽象方法（类中包含抽象方法该类必须申明为抽象类）
+    abstract修饰的抽象类不继承将毫无意义
+    继承该类后进行方法的重写
+     */
+    /*
+    此处的rotate翻转方法：每块方块都要进行翻转，但是翻转的方法不同
+     */
+    public abstract void rotate(boolean dir);
+
+
 }

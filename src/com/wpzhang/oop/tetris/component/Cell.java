@@ -33,17 +33,22 @@ public class Cell {
     Image backImg;
 
 
-    public void drop() {
-        row ++;
-    }
+    public void drop() { row ++; }
+    public void drop(int step) { row +=step; }
 
     public void moveLeft() {
         col --;
     }
+    public void moveLeft(int step) { col -=step; }
+
 
     public void moveRight() {
         col ++;
     }
+    public void moveRight(int step) {
+        col += step;
+    }
+
 
     public void paint(Graphics g, int x , int y) {
         g.drawImage(backImg,            // 背景图片

@@ -33,5 +33,7 @@ public class TetrominoO extends Tetromino {
         cells[2] = new Cell(row + 1, col, backImg);
         cells[3] = new Cell(row + 1, col + 1, backImg);
     }
+    public void rotate(boolean dir) {
 
+    }
 }

@@ -35,5 +35,6 @@ public class GameStart extends JFrame {
         game.add(new Tetris());
 
         game.setVisible(true);  // 显示窗体
+
     }
 }
