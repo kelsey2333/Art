@@ -3,7 +3,7 @@
  * @Date 2019/3/13
  * @Description
  */
-package com.wpzhang.com.wpzhang.oop.day01;
+package com.wpzhang.oop.day02;
 
 /**
  * @program: Wpzhang
@@ -19,7 +19,6 @@ public class Cell {
         this.row = row;
         this.col = col;
     }
-
     //单元格下落：drop方法
     public void Drop() {
         row++;
