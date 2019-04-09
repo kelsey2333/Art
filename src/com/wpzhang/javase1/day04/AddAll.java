@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * @program: Wpzhang
@@ -18,6 +19,19 @@ import java.util.HashSet;
  * @create: 2019-04-01 11:47
  **/
 public class AddAll {
+    @Test
+    public void Add(){
+        List<String> c = new ArrayList<String>();
+        System.out.println(c);
+        c.add("I");
+        c.add("like");
+        c.add("running");
+        System.out.println(c);
+    }
+    @Override
+    public String toString() {
+        return "AddAll{}";
+    }
     @Test
     public void testAddAllAndContainsAll(){
         Collection<String> c1 = new ArrayList<String>();
