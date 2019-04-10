@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * @program: Wpzhang
- * @description:TODO 对象序列化到哪里？？
+ * @description:对象序列化：序列化到.obj文件里，只要创建.obj文件就会产生，不用管它是否存在
  * @author: wpzhang
  * @create: 2019-04-08 18:08
  **/
@@ -27,7 +27,7 @@ public class EmpList {
         System.out.println(e);
         FileOutputStream fos = null;
         try {
-            fos = new FileOutputStream("emplist.obj");
+            fos = new FileOutputStream("E:/壁纸/a.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(e);
             System.out.println("序列化完毕");
