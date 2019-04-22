@@ -1,0 +1,92 @@
+--创建员工信息表
+create table empInfo_wpzhang(
+	empno number(4,0),
+	ename varchar2(10),
+	job carchar(9),
+	mgr number(4,0),
+	hierdate date,
+	sal number(7.2),
+	comm number(7,2),
+	deptno number(2,0)
+);
+
+/*
+对于empInfo_wpzhang 执行以下查询
+*/
+--列出job列的值和job的字符数
+select
+job,length(job)
+from empInfo_wpzhang order by job;
+
+--列出dream salary
+select
+ename ||'earn $'||sal||'monthly but wants $'||sal*3 as "dream salary"
+from empInfo_wpzhang;
+
+--永远没有结果查询出，大写函数和小写数据永远不匹配
+salect
+empno ename
+from empInfo_wpzhang where upper(job) = 'clerk';
+
+--从字符串位置1开始截取6个字符，查询结果为doctor
+select
+substr('doctor who',1,6)
+from dual;
+
+--从"半月二更半"中截取“半”，查询结果为“二更半”
+select
+trim('半'from'半月二更半')as "上联"
+from dual;
+
+--从左边截去“半”
+select
+trim(leading '半'from'半月')as"上联"
+from dual;
+
+--从右边截去“半”
+select
+trim(trailing'半'from'半月二更半')as"上联"
+from dual;
+
+--将tardis左边用*补齐10位
+select
+lpad('tardis',10,'*')
+from dual;
+
+--将tardis右边用*补齐3位，因字符本身超过3位，查询结果为“tar”
+select
+rpad('tardis',3,'*')
+from dual;
+
+--查找员工姓名长度是5个字符的员工信息
+select
+*
+from empInfo_wpzhang where length(ename = 5);
+
+/*
+对员工信息表或者dual表执行以下查询。描述查询结果
+*/
+--列出涨薪后工资，并四舍五入
+select
+ename,sal,round(sal*1.08)
+from empInfo_wpzhang;
+
+--查询结果是11除以3的余数。结果是3
+select
+mod(11,4)
+from dual;
+
+--查询结果为120，截取小数点前1位
+select
+trunc(123.123,-1)
+from dual;
+
+--查询员工入职天数
+select
+floor(sysdate-hiredate)as"入职天数",ename
+from empInfo_wpzhang;
+
+--向t_account_wpzhang表中插入一条记录
+insert into t_account_wpzhang(
+id,login_name,login_passwd,create_date,real_name,idcard_no,telephone
+)values(1,'shiyl','256528',to_date('2014-03-02','yyyy-mm-dd'),'shiyuanli','410381194302256523',136669351234);
