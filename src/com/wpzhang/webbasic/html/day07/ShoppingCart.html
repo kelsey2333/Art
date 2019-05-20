@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <script>
+        var totalPrice = 0;
+        function addCart(id){
+
+            var name;
+            var count = document.getElementById(id).value;
+            var price;
+            switch(id){
+                case "mouseCount":
+                    //将鼠标添加到购物车
+                    name = "鼠标";
+                    price = 80;
+                    break;
+                case "keyboardCount":
+                    //将键盘添加到购物车
+                    name = "键盘";
+                    price = 180;
+                    break;
+                case "displayCount":
+                    name = "显示器";
+                    price = 1800;
+                    break;
+                default:
+                    break;
+            }
+
+            //创建tr
+            var trObj = document.createElement("tr");
+
+            var td1Obj = document.createElement("td");
+            var td2Obj = document.createElement("td");
+            var td3Obj = document.createElement("td");
+            var td4Obj = document.createElement("td");
+            var td5Obj = document.createElement("td");
+
+            //
+            td1Obj.innerText = name;
+            td2Obj.innerText = price;
+            td3Obj.innerText = count;
+            td4Obj.innerText = price * count;
+            td5Obj.innerHTML = "<button onclick='trObj.removeChild(td1Obj);'>删除</button>"+
+                "<button>+</button><button>-</button>"
+
+            trObj.appendChild(td1Obj);
+            trObj.appendChild(td2Obj);
+            trObj.appendChild(td3Obj);
+            trObj.appendChild(td4Obj);
+            trObj.appendChild(td5Obj);
+
+            document.getElementById("cartBody").append(trObj);
+            totalPrice += (price * count);
+            //修改合计
+            document.getElementById("total").innerText = totalPrice;
+        }
+    </script>
+</head>
+<body>
+    <div class="products">
+        <table>
+            <thead>
+            <tr>
+                <th>商品名称</th>
+                <th>商品单价</th>
+                <th>商品数量</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>鼠标</td>
+                <td>80.0</td>
+                <td><input id="mouseCount" type="text"></td>
+                <td><button onclick="addCart('mouseCount');">+</button></td>
+            </tr>
+            <tr>
+                <td>键盘</td>
+                <td>180.0</td>
+                <td><input id="keyboardCount" type="text"></td>
+                <td><button onclick="addCart('keyboardCount');">+</button></td>
+            </tr>
+            <tr>
+                <td>显示器</td>
+                <td>1800.0</td>
+                <td><input id="displayCount" type="text"></td>
+                <td><button onclick="addCart('displayCount');">+</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+<div class="cart">
+    <table>
+        <thead>
+        <tr>
+            <th>商品单价</th>
+            <th>商品数量</th>
+            <th>小计</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody id="cartBody">
+        <!---->
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>合计</td>
+                <td id="total" colspan="3">0</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+</body>
+</html>
