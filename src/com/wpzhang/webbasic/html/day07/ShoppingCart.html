@@ -41,13 +41,13 @@
             var td4Obj = document.createElement("td");
             var td5Obj = document.createElement("td");
 
-            //
+
             td1Obj.innerText = name;
             td2Obj.innerText = price;
             td3Obj.innerText = count;
             td4Obj.innerText = price * count;
             td5Obj.innerHTML = "<button onclick='removetr(event);'>删除</button>"+
-                "<button onclick='addCount(event);'>+</button><button>-</button>"
+                "<button onclick='addCount(event);'>+</button><button onclick='minusCount(event);'>-</button>"
 
             trObj.appendChild(td1Obj);
             trObj.appendChild(td2Obj);
@@ -63,32 +63,44 @@
         function addCount(e) {
             var myObj = e.srcElement || e.target;
             // 获取父类的元素对象
-            var faObj = myObj.parentNode.parentElement;
+            var faObj = myObj.parentNode.parentNode; // tr
 
             // td数组
             var sonArray = faObj.childNodes;
             var price = sonArray[1].innerText;
-            var count = sonArray[2].innerText;
-            // var cp = price*count;//小计
-            // cp = sonArray[3].innerText
-
-            count++;
-            var newCount = ++sonArray[2].innerText;//数量
-
-            sonArray[3].innerText *= newCount ;//小计
+            var count = parseFloat(sonArray[2].innerText);
 
 
-            totalPrice = price*count;
-            totalPrice += price;
+            sonArray[2].innerText = count + 1;
+            sonArray[3].innerText = price * (count + 1) ;//小计
+            totalPrice += parseFloat(price);
 
             // 修改总计
             var totalObj = document.getElementById("total");
             totalObj.innerText= totalPrice;
         }
+        function minusCount(e){
+            var myObj = e.srcElement || e.target;
+            //获取父类的元素对象
+            var faObj = myObj.parentNode.parentNode;
+
+            //td数组
+            var sonArray = faObj.childNodes;
+            var price = parseFloat(sonArray[1].innerText);
+            var count = parseFloat(sonArray[2].innerText);
+
+            sonArray[2].innerText = count - 1;//数量-1
+            sonArray[3].innerText = price * (count - 1);//小计
+
+            totalPrice -= price;
+            var totalObj = document.getElementById("total");
+            totalObj.innerText = totalPrice;
+
+        }
         function removetr(e) {
             var myObj = e.srcElement || e.target;
             // 获取父类的元素对象
-            var faObj = myObj.parentNode.parentElement;
+            var faObj = myObj.parentNode.parentNode;
 
             // td数组
             var sonArray = faObj.childNodes;
@@ -103,6 +115,12 @@
             faObj.parentNode.removeChild(faObj);
         }
     </script>
+    <style>
+        table, tr, td {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+    </style>
 </head>
 <body>
     <div class="products">
