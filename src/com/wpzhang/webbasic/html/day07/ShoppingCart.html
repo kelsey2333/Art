@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>购物车</title>
     <script>
+        //设置不可重复
+        var cartArrays = new Array(["鼠标","0"],["键盘","0"],["显示器","0"]);
         var totalPrice = 0;
         function addCart(id){
 
@@ -27,6 +29,7 @@
                     break;
                 default:
                     break;
+
             }
 
             //创建tr
@@ -43,8 +46,8 @@
             td2Obj.innerText = price;
             td3Obj.innerText = count;
             td4Obj.innerText = price * count;
-            td5Obj.innerHTML = "<button onclick='trObj.removeChild(td1Obj);'>删除</button>"+
-                "<button>+</button><button>-</button>"
+            td5Obj.innerHTML = "<button onclick='removetr(event);'>删除</button>"+
+                "<button onclick='addCount(event);'>+</button><button>-</button>"
 
             trObj.appendChild(td1Obj);
             trObj.appendChild(td2Obj);
@@ -56,6 +59,48 @@
             totalPrice += (price * count);
             //修改合计
             document.getElementById("total").innerText = totalPrice;
+        }
+        function addCount(e) {
+            var myObj = e.srcElement || e.target;
+            // 获取父类的元素对象
+            var faObj = myObj.parentNode.parentElement;
+
+            // td数组
+            var sonArray = faObj.childNodes;
+            var price = sonArray[1].innerText;
+            var count = sonArray[2].innerText;
+            // var cp = price*count;//小计
+            // cp = sonArray[3].innerText
+
+            count++;
+            var newCount = ++sonArray[2].innerText;//数量
+
+            sonArray[3].innerText *= newCount ;//小计
+
+
+            totalPrice = price*count;
+            totalPrice += price;
+
+            // 修改总计
+            var totalObj = document.getElementById("total");
+            totalObj.innerText= totalPrice;
+        }
+        function removetr(e) {
+            var myObj = e.srcElement || e.target;
+            // 获取父类的元素对象
+            var faObj = myObj.parentNode.parentElement;
+
+            // td数组
+            var sonArray = faObj.childNodes;
+            var price = sonArray[1].innerText;
+            var count = sonArray[2].innerText;
+            totalPrice -= price * count;
+            // 修改总计
+            var totalObj = document.getElementById("total");
+            totalObj.innerText= totalPrice;
+
+            // 删除此行
+            faObj.parentNode.removeChild(faObj);
         }
     </script>
 </head>
@@ -96,6 +141,7 @@
     <table>
         <thead>
         <tr>
+            <th>商品名称</th>
             <th>商品单价</th>
             <th>商品数量</th>
             <th>小计</th>
