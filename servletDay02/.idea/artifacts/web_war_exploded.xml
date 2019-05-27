@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="web:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/web_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="servletDay02/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="servletDay02" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="D:/IDEA/jars/ojdbc6.jar" />
+          <element id="file-copy" path="D:/IDEA/jars/mysql-connector-java-5.1.16.jar" />
+          <element id="file-copy" path="D:/IDEA/jars/commons-collections-3.1.jar" />
+          <element id="file-copy" path="D:/IDEA/jars/commons-dbcp-1.2.2.jar" />
+          <element id="file-copy" path="D:/IDEA/jars/commons-pool.jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
