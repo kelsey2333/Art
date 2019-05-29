@@ -15,7 +15,7 @@ import java.io.IOException;
    2、在html界面修改好后跳转到/list/emp&xxxx&xxxx&xxxx界面(此处用get方法可以在地址栏看到name:value键值对)
       /mod/emp里只做两件事：-调用修改的方法修改数据库中数据。
                             -list修改后的数据
-   3、todo 如何不修改id?
+
  */
 @WebServlet(name = "ModifyEmpServlet",urlPatterns = "/mod/emp")
 public class ModifyEmpServlet extends HttpServlet {
@@ -35,7 +35,7 @@ public class ModifyEmpServlet extends HttpServlet {
         EmpDao empDao = new EmpDaoImpl();
         empDao.modify(new Emp(Integer.parseInt(id),username,Double.parseDouble(sal),Integer.parseInt(age)));
 
-        resp.sendRedirect("/servletDay02/list/emp");
+        resp.sendRedirect("/servletDay02/jsp/listEmp.jsp");
         resp.setContentType("text/html;charset=utf-8");
     }
 }

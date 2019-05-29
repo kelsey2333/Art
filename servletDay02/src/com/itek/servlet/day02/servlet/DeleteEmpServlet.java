@@ -28,7 +28,7 @@ public class DeleteEmpServlet extends HttpServlet {
             //删除一条语句
             empDao.deleteById(Integer.parseInt(idstr));
             //重定向到listEmp  显示数据
-            resp.sendRedirect("/servletDay02/list/emp");
+            resp.sendRedirect("/servletDay02/jsp/listEmp.jsp");
         }
     }
 }

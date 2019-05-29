@@ -29,13 +29,12 @@ public class AddEmpServlet extends HttpServlet {
         System.out.println(sal);
         System.out.println(age);
         System.out.println(username);
-
         //将数据保存起来到数据库
         EmpDao empDao = new EmpDaoImpl();
         empDao.addEmp(new Emp(null,username,Double.parseDouble(sal),Integer.parseInt(age)));
         //返回设置数据的编码格式
         resp.setContentType("text/html;charset=utf-8");
         //返回客户端的数据给浏览器
-        resp.sendRedirect("/servletDay02/list/emp");
+        resp.sendRedirect("/servletDay02/jsp/listEmp.jsp");
     }
 }
