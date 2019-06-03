@@ -1,12 +1,9 @@
 /**
  * @Author wpzhang
- * @Date 2019/5/28
+ * @Date 2019/6/3
  * @Description
  */
-package com.itek.servletDay05.servlet;
-
-import com.itek.servletDay05.dao.EmpDao;
-import com.itek.servletDay05.dao.Impl.EmpDaoImpl;
+package com.itek.servletDay09;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,20 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @program: servletDay05
+ * @program: servletDAY09
  * @description:
  * @author: wpzhang
- * @create: 2019-05-28 22:45
+ * @create: 2019-06-03 14:55
  **/
-@WebServlet(name = "DelEmpServlet",urlPatterns = "/del/emp")
-public class DelEmpServlet extends HttpServlet {
+@WebServlet(name = "listServlet",urlPatterns = "/list")
+public class listServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
-        String deptno = req.getParameter("deptno");
-        EmpDao empDao = new EmpDaoImpl();
-        empDao.delEmp(Integer.parseInt(deptno));
+        req.getRequestDispatcher("/WEB-INF/jsp/color.jsp").forward(req,resp);
         resp.setContentType("text/html;charset=utf-8");
-        resp.sendRedirect("/servletDay05/jsp/listEmp.jsp");
     }
 }
