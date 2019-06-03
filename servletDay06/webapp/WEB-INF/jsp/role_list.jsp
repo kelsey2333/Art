@@ -63,7 +63,6 @@
                 <%
                     //创建jsp的好处就是用内置对象不用创建新对象
                     List<Role> roles = (List<Role>) request.getAttribute("allRoles");
-                    System.out.println("集合roles: " + roles);
                     for (Role allRoles:roles){
                 %>
                 <tr>

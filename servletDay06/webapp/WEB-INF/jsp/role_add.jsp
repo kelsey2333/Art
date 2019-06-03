@@ -46,7 +46,7 @@
         <div id="main">            
             <!--保存操作后的提示信息：成功或者失败-->
             <div id="save_result_info" class="save_success">保存成功！</div><!--保存失败，角色名称重复！-->
-            <form action="http://localhost:8080/servletDay06/addR.role" method="get" class="main_form">
+            <form action="http://localhost:8080/servletDay06/modi.role" method="get" class="main_form">
                 <div class="text_info clearfix"><span>角色名称：</span></div>
                 <div class="input_info">
                     <input name="roleName" type="text" class="width200" />

@@ -122,7 +122,6 @@ public class RoleDaoImpl implements RoleDao {
             conn = DBUtil.getPoolConnection();
             ps = conn.prepareStatement("select id from t_role where role_name =?");
             ps.setString(1,roleName);
-            System.out.println(roleName);//艾尔
             ResultSet rs = ps.executeQuery();
             Boolean isnext = rs.next();
             return rs.getInt(1);
@@ -149,13 +148,39 @@ public class RoleDaoImpl implements RoleDao {
             for (int i = 0;i < powerId.length;i++){
                 ps.setInt(1,roleId);
                 ps.setInt(2,powerId[i]);
-                System.out.println("powerId[i]为：" + powerId[i]);
                 ps.addBatch();
             }
             ps.executeBatch();
         } catch (SQLException e) {
             System.out.println("插入数据失败");
             e.printStackTrace();
+        }
+        return -1;
+    }
+
+    /**
+     * @Param
+     * @description 更新操作
+     * @date 2019/6/3 19:28
+     * @return
+     */
+    @Override
+    public int updateRole(Integer modiRoleId, Integer[] modiPowerNameId) {
+        Connection conn = DBUtil.getPoolConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement("update t_role_power set role_id =? , power_id =? where role_id =?");
+            for (int i = 0;i < modiPowerNameId.length ; i++ ){
+                ps.setInt(1,modiRoleId);
+                ps.setInt(2,modiPowerNameId[i]);
+                ps.setInt(3,modiRoleId);
+                ps.addBatch();
+            }
+                ps.executeBatch();
+        } catch (SQLException e) {
+            System.out.println("更新数据成功");
+            e.printStackTrace();
+        }finally {
+            DBUtil.closeConnection(conn);
         }
         return -1;
     }

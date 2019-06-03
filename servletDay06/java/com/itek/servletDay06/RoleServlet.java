@@ -44,7 +44,15 @@ public class RoleServlet extends HttpServlet {
                 String loginName = req.getParameter("loginName");
                 String pwd = req.getParameter("pwd");
                 // TODO 验证码参数
+                //获取验证码，getParameter("capchar")  capchar是单独的servelet
+
                 // TODO 校验验证码(session)
+                //获取session对象/
+                /*
+                1、获取正确验证码 getSession().getAttribute()
+                2、将其转换成字符串
+                3、之前的验证码和获取的验证码进行比较
+                 */
 
                 if ("admin".equals(loginName) && "admin".equals(pwd)) {
                     // 用户名和密码输入正确, 保存用户登录状态
@@ -94,12 +102,23 @@ public class RoleServlet extends HttpServlet {
                 req.getRequestDispatcher("/list.role").forward(req,resp);
                 break;
             case "modi":
-                String modiRoleName = req.getParameter("roleName");
-                String modiPowerName = req.getParameter("powerName");
-                //绑定数据到request中setAttribute("属性名",属性值)
-                req.setAttribute("roleName",modiRoleName);
-                req.setAttribute("powerName",modiPowerName);
+//                String modiRoleName = req.getParameter("roleName");
+//                String modiPowerName = req.getParameter("powerName");
+//                //绑定数据到request中setAttribute("属性名",属性值)
+//                req.setAttribute("roleName",modiRoleName);
+//                req.setAttribute("powerName",modiPowerName);
+                //只进行显示
                 req.getRequestDispatcher("/WEB-INF/jsp/role_modi.jsp").forward(req,resp);
+                break;
+            case "modiR":
+                String modiRoleName = req.getParameter("roleName");
+                String[] modiPowerId = req.getParameterValues("powerName");
+                Integer[] modiPowerNameId = getPowerId(modiPowerId);
+                //根据角色名称获取角色roleId
+                Integer modiRoleId = roleDao.receiveId(modiRoleName);
+                //根据roleId,powerIdgen更新到t_role_power表中
+                roleDao.updateRole(modiRoleId,modiPowerNameId);
+                req.getRequestDispatcher("/list.role").forward(req,resp);
                 break;
             default:
                 break;

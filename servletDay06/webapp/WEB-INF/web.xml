@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+           version="3.0">
+    <welcome-file-list>
+        <welcome-file>login.html</welcome-file>
+    </welcome-file-list>
+
+    <!--声明异常处理，捕获到异常进入到location页面中
+    必须是没有处理的异常，而且没有具体错误信息：
+
+    -->
+    <!--<error-page>-->
+        <!--&lt;!&ndash;<exception-type>&ndash;&gt;-->
+            <!--&lt;!&ndash;java.lang.Exception&ndash;&gt;-->
+        <!--&lt;!&ndash;</exception-type>&ndash;&gt;-->
+        <!--<location>/error.html</location>-->
+    <!--</error-page>-->
+
+</web-app>

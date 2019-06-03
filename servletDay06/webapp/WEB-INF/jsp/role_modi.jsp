@@ -50,11 +50,11 @@
         <div id="main">           
             <!--保存操作后的提示信息：成功或者失败-->
             <div id="save_result_info" class="save_success">保存成功！</div>
-            <form action="" method="" class="main_form">
+            <form action="<%=request.getContextPath()%>/modiR.role" method="" class="main_form">
                 <div class="text_info clearfix"><span>角色名称：</span></div>
                 <div class="input_info">
 
-                    <input type="text" class="width200" value="<%=(String)request.getAttribute("roleName")%>" />
+                    <input type="text" class="width200" name="roleName" value="<%=request.getParameter("roleName")%>" />
                     <span class="required">*</span>
                     <div class="validate_msg_medium error_msg">不能为空，且为20长度的字母、数字和汉字的组合</div>
                 </div>                    
@@ -63,67 +63,68 @@
                     <div class="input_info_scroll">
                         <ul>
                             <%
-                                String modiPowerName = (String)request.getAttribute("powerName");
-                                System.out.println(modiPowerName);
-                                String[] powerNameStr = modiPowerName.split(",");
-
-                                    if(powerNameStr.length == 9){
-                                        for (int i = 0;i < powerNameStr.length;i++){
+                                String modiPowerName = request.getParameter("powerName");
+                                List<String> powerNames = Arrays.asList(modiPowerName.split(","));
                             %>
-                            <li><input type="checkbox" checked /><%=powerNameStr[i]%></li>
+                             <li><input type="checkbox" name="powerName" value="7"
                             <%
-                                    }} if (powerNameStr.length < 9){
-                                         for (int i = 0;i < powerNameStr.length;i++){
-                            %>
-                            <li><input type="checkbox" checked /><%=powerNameStr[i]%></li>
-                            <%
-                                    if (powerNameStr[i] != "报表"){
-                            %>
-                            <li><input type="checkbox"  />报表</li>
-                            <%
-                                    }if (powerNameStr[i] != "业务管理"){
-                            %>
-                            <li><input type="checkbox" />业务管理</li>
-                            <%
-                                    }if (powerNameStr[i] != "管理员管理"){
-                            %>
-                            <li><input type="checkbox"  />管理员管理</li>
-                            <%
-                                    }if (powerNameStr[i] != "角色管理"){
-                            %>
-                            <li><input type="checkbox"  />业务管理</li>
-                            <%
-                                    }if (powerNameStr[i] != "账单"){
-                            %>
-                            <li><input type="checkbox"  />账单</li>
-                            <%
-                                    }if (powerNameStr[i] != "账单管理员"){
-                            %>
-                            <li><input type="checkbox"  />账单管理员</li>
-                            <%
-                                    }if (powerNameStr[i] != "账户管理"){
-                            %>
-                            <li><input type="checkbox"  />账户管理</li>
-                            <%
-                                    }if (powerNameStr[i] != "资费管理"){
-                            %>
-                            <li><input type="checkbox"  />资费管理</li>
-                            <%
-                                    }if (powerNameStr[i] != "超级管理员"){
-                            %>
-                            <li><input type="checkbox"  />超级管理员</li>
-                            <%
-                                    }
+                               String powerNamesStr =  powerNames.toString().substring( powerNames.toString().indexOf("[")+1, powerNames.toString().indexOf("]"));
+                                if (powerNamesStr.contains("报表")) {
+                                    out.write("checked");
                                 }
-                            }
                             %>
+                            />报表</li>
+                             <li><input type="checkbox" name="powerName" value="5"
+                             <%
+
+                                if (powerNamesStr.contains("业务管理")){
+                                    out.write("checked");
+                                }
+                             %>
+                             />业务管理</li>
+                            <li><input type="checkbox" name="powerName" value="2"
+                            <%
+                                if (powerNamesStr.contains("管理员管理"))
+                                    out.write("checked");
+                            %>
+                            />管理员管理</li>
+                            <li><input type="checkbox" name="powerName" value="1"
+                            <%
+                                if (powerNamesStr.contains("角色管理"))
+                                    out.write("checked");
+                            %>
+                            />角色管理</li>
+                            <li><input type="checkbox" name="powerName" value="3"
+                            <%
+                                if (powerNamesStr.contains("资费管理"))
+                                    out.write("checked");
+                            %>
+                            />资费管理</li>
+                            <li><input type="checkbox" name="powerName" value="4"
+                            <%
+                                if (powerNamesStr.contains("账户管理"))
+                                    out.write("checked");
+                            %>
+                            />账户管理</li>
+                            <li><input type="checkbox" name="powerName" value="6"
+                            <%
+                                if (powerNamesStr.contains("账单"))
+                                    out.write("checked");
+                            %>
+                            />账单</li>
+                            <li><input type="checkbox" name="powerName" value="8"
+                            <%
+                                if (powerNamesStr.contains("超级管理员"))
+                                    out.write("checked");
+                            %>
+                            />超级管理员</li>
                         </ul>
                     </div>
                     <span class="required">*</span>
                     <div class="validate_msg_tiny">至少选择一个权限</div>
                 </div>
                 <div class="button_info clearfix">
-                    <input type="button" value="保存" class="btn_save" onclick="showResult();" />
+                    <input type="submit" value="保存" class="btn_save" onclick="showResult();" />
                     <input type="button" value="取消" class="btn_save" />
                 </div>
             </form> 
