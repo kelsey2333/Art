@@ -107,17 +107,24 @@ public class RoleServlet extends HttpServlet {
 //                //绑定数据到request中setAttribute("属性名",属性值)
 //                req.setAttribute("roleName",modiRoleName);
 //                req.setAttribute("powerName",modiPowerName);
+
                 //只进行显示
                 req.getRequestDispatcher("/WEB-INF/jsp/role_modi.jsp").forward(req,resp);
                 break;
             case "modiR":
+                //获取修改后的角色名称
                 String modiRoleName = req.getParameter("roleName");
+                //获取修改后的权限id
                 String[] modiPowerId = req.getParameterValues("powerName");
                 Integer[] modiPowerNameId = getPowerId(modiPowerId);
                 //根据角色名称获取角色roleId
-                Integer modiRoleId = roleDao.receiveId(modiRoleName);
-                //根据roleId,powerIdgen更新到t_role_power表中
-                roleDao.updateRole(modiRoleId,modiPowerNameId);
+                int roleId2 = roleDao.receiveId(modiRoleName);
+                //根据roleId删除当前行
+                roleDao.delRolePower(roleId2);
+//                //将用户输入的角色名称插入到t_role表中
+//                roleDao.addRoleName(modiRoleName);
+                //根据roleId,powerId插入到t_role_power表中
+                roleDao.addRole(roleId2,modiPowerNameId);
                 req.getRequestDispatcher("/list.role").forward(req,resp);
                 break;
             default:

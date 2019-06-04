@@ -83,6 +83,8 @@ public class RoleDaoImpl implements RoleDao {
         }return -1;
     }
 
+
+
     /**
      * @Param
      * @description 插入到t_role表
@@ -158,30 +160,25 @@ public class RoleDaoImpl implements RoleDao {
         return -1;
     }
 
-    /**
-     * @Param
-     * @description 更新操作
-     * @date 2019/6/3 19:28
-     * @return
-     */
     @Override
-    public int updateRole(Integer modiRoleId, Integer[] modiPowerNameId) {
+    public int delRolePower(int id) {
         Connection conn = DBUtil.getPoolConnection();
         try {
-            PreparedStatement ps = conn.prepareStatement("update t_role_power set role_id =? , power_id =? where role_id =?");
-            for (int i = 0;i < modiPowerNameId.length ; i++ ){
-                ps.setInt(1,modiRoleId);
-                ps.setInt(2,modiPowerNameId[i]);
-                ps.setInt(3,modiRoleId);
-                ps.addBatch();
-            }
-                ps.executeBatch();
+            PreparedStatement ps =  conn.prepareStatement("DELETE FROM t_role_power WHERE role_id = ?");
+            ps.setInt(1,id);
+            int count = ps.executeUpdate();
+            if (count >= 1){
+                System.out.println("删除成功");
+            }else{
+                System.out.println("删除失败");
+            }return count;
         } catch (SQLException e) {
-            System.out.println("更新数据成功");
             e.printStackTrace();
         }finally {
             DBUtil.closeConnection(conn);
-        }
-        return -1;
+        }return -1;
     }
+
+
+
 }

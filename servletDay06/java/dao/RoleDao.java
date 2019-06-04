@@ -10,5 +10,5 @@ public interface RoleDao {
     int addRoleName(String roleName);
     Integer receiveId(String roleName);
     int addRole(Integer roleId,Integer[] powerId);
-    int updateRole(Integer modiRoleId,Integer[] modiPowerNameId);
+    int delRolePower(int id);
 }

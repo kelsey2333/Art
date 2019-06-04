@@ -118,6 +118,12 @@
                                     out.write("checked");
                             %>
                             />超级管理员</li>
+                            <li><input type="checkbox" name="powerName" value="8"
+                            <%
+                                if (powerNamesStr.contains("账单管理员"))
+                                    out.write("checked");
+                            %>
+                            />账单管理员</li>
                         </ul>
                     </div>
                     <span class="required">*</span>
