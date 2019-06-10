@@ -70,8 +70,8 @@
                     <div class="validate_msg_tiny">至少选择一个权限</div>
                 </div>
                 <div class="button_info clearfix">
-                    <input type="submit" value="保存" class="btn_save"  />
-                    <input type="button" value="取消" class="btn_save" />
+                    <input type="submit" value="保存" class="btn_save" onclick="showResult();"  />
+                    <a href="<%=request.getContextPath()%>/list.role"><input type="button" value="取消" class="btn_save" /></a>
                 </div>
             </form>
         </div>

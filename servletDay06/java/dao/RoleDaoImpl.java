@@ -146,7 +146,7 @@ public class RoleDaoImpl implements RoleDao {
     public int addRole(Integer roleId, Integer[] powerId) {
         Connection conn = DBUtil.getPoolConnection();
         try {
-            PreparedStatement ps = conn.prepareStatement("insert into t_role_power values (?,?)");
+            PreparedStatement ps = conn.prepareStatement("insert into t_role_power(role_id,power_id) values (?,?)");
             for (int i = 0;i < powerId.length;i++){
                 ps.setInt(1,roleId);
                 ps.setInt(2,powerId[i]);

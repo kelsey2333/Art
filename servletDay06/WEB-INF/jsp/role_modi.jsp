@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Arrays" %>
 <%@page contentType="text/html; UTF-8" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html >
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -65,64 +66,35 @@
                             <%
                                 String modiPowerName = request.getParameter("powerName");
                                 List<String> powerNames = Arrays.asList(modiPowerName.split(","));
+                                String powerNamesStr =  powerNames.toString().substring( powerNames.toString().indexOf("[")+1, powerNames.toString().indexOf("]"));
+                                pageContext.setAttribute("powerNameStr",powerNamesStr);
                             %>
                              <li><input type="checkbox" name="powerName" value="7"
-                            <%
-                               String powerNamesStr =  powerNames.toString().substring( powerNames.toString().indexOf("[")+1, powerNames.toString().indexOf("]"));
-                                if (powerNamesStr.contains("报表")) {
-                                    out.write("checked");
-                                }
-                            %>
+                                     <c:if test="${powerNameStr.contains('报表')}">checked</c:if>
                             />报表</li>
                              <li><input type="checkbox" name="powerName" value="5"
-                             <%
-
-                                if (powerNamesStr.contains("业务管理")){
-                                    out.write("checked");
-                                }
-                             %>
+                                        <c:if test="${powerNameStr.contains('业务管理')}">checked</c:if>
                              />业务管理</li>
                             <li><input type="checkbox" name="powerName" value="2"
-                            <%
-                                if (powerNamesStr.contains("管理员管理"))
-                                    out.write("checked");
-                            %>
+                                       <c:if test="${powerNameStr.contains('管理员管理')}">checked</c:if>
                             />管理员管理</li>
                             <li><input type="checkbox" name="powerName" value="1"
-                            <%
-                                if (powerNamesStr.contains("角色管理"))
-                                    out.write("checked");
-                            %>
+                                       <c:if test="${powerNameStr.contains('角色管理')}">checked</c:if>
                             />角色管理</li>
                             <li><input type="checkbox" name="powerName" value="3"
-                            <%
-                                if (powerNamesStr.contains("资费管理"))
-                                    out.write("checked");
-                            %>
+                                       <c:if test="${powerNameStr.contains('资费管理')}">checked</c:if>
                             />资费管理</li>
                             <li><input type="checkbox" name="powerName" value="4"
-                            <%
-                                if (powerNamesStr.contains("账户管理"))
-                                    out.write("checked");
-                            %>
+                                       <c:if test="${powerNameStr.contains('账户管理')}">checked</c:if>
                             />账户管理</li>
                             <li><input type="checkbox" name="powerName" value="6"
-                            <%
-                                if (powerNamesStr.contains("账单"))
-                                    out.write("checked");
-                            %>
+                                       <c:if test="${powerNameStr.contains('账单')}">checked</c:if>
                             />账单</li>
                             <li><input type="checkbox" name="powerName" value="8"
-                            <%
-                                if (powerNamesStr.contains("超级管理员"))
-                                    out.write("checked");
-                            %>
+                                       <c:if test="${powerNameStr.contains('超级管理员')}">checked</c:if>
                             />超级管理员</li>
                             <li><input type="checkbox" name="powerName" value="8"
-                            <%
-                                if (powerNamesStr.contains("账单管理员"))
-                                    out.write("checked");
-                            %>
+                                       <c:if test="${powerNameStr.contains('账单管理员')}">checked</c:if>
                             />账单管理员</li>
                         </ul>
                     </div>
@@ -131,7 +103,7 @@
                 </div>
                 <div class="button_info clearfix">
                     <input type="submit" value="保存" class="btn_save" onclick="showResult();" />
-                    <input type="button" value="取消" class="btn_save" />
+                    <a href="<%=request.getContextPath()%>/list.role"><input type="button" value="取消" class="btn_save"  /></a>
                 </div>
             </form> 
         </div>
