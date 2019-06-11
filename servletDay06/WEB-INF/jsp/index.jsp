@@ -1,4 +1,4 @@
-﻿<%@page contentType="text/html; UTF-8" %>
+﻿<%@page contentType="text/html; utf-8" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -11,7 +11,7 @@
         <div id="index_navi">
             <ul id="menu">
                 <li><a href="index.html" class="index_on"></a></li>
-                <li><a href="<%=request.getContextPath()%>/list.role" class="role_off"></a></li>
+                <li><a href="role/role_list.html" class="role_off"></a></li>
                 <li><a href="admin/admin_list.html" class="admin_off"></a></li>
                 <li><a href="fee/fee_list.html" class="fee_off"></a></li>
                 <li><a href="account/account_list.html" class="account_off"></a></li>

@@ -8,15 +8,5 @@
         <welcome-file>login.html</welcome-file>
     </welcome-file-list>
 
-    <!--声明异常处理，捕获到异常进入到location页面中
-    必须是没有处理的异常，而且没有具体错误信息：
-
-    -->
-    <!--<error-page>-->
-        <!--&lt;!&ndash;<exception-type>&ndash;&gt;-->
-            <!--&lt;!&ndash;java.lang.Exception&ndash;&gt;-->
-        <!--&lt;!&ndash;</exception-type>&ndash;&gt;-->
-        <!--<location>/error.html</location>-->
-    <!--</error-page>-->
 
 </web-app>
