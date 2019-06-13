@@ -5,12 +5,18 @@
  */
 package com.itek.netctoss.servlet;
 
+import com.itek.netctoss.service.AccountService;
+import com.itek.netctoss.service.impl.AccountServiceImpl;
+import commons.Consts;
+import domain.Account;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @program: netctoss
@@ -22,11 +28,28 @@ import java.io.IOException;
 public class AccountServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //todo 拦截地址进行截取
+        //todo 拦截地址用拦截器截取
         String requestURI =  req.getRequestURI();
         String uriStr = getUri(requestURI);
         switch (uriStr){
-            case "account":
+            case "list":
+                AccountService accountService = new AccountServiceImpl();
+                String pageNo = req.getParameter("pageNo");
+                int endPage = accountService.getAccountEndPage();
+
+                String idCard = req.getParameter("idCard");
+                String realName = req.getParameter("realName");
+                String loginName = req.getParameter("loginName");
+                String status = req.getParameter("status");
+                Account account = new Account(idCard,realName,loginName,status);
+                //都一次进去list.acc里没有传入任何pageNo，需设默认值pageNo为1；
+                if (pageNo == null){
+                    pageNo = "1";
+                }
+                List<Account> accounts = accountService.selectAccountInfo(Integer.parseInt(pageNo),Consts.PAGE_SIZE ,account);
+                req.setAttribute("accounts" ,accounts);
+                req.setAttribute("curPage",pageNo);
+                req.setAttribute("endPage",endPage);
                 //查询账号列表页
                 req.getRequestDispatcher("/WEB-INF/jsp/accountList.jsp").forward(req,resp);
                 break;
