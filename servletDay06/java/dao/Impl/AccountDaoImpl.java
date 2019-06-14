@@ -102,6 +102,7 @@ public class AccountDaoImpl implements AccountDao {
     }
 
 
+
     /**
      * @Param
      * @description 计算记录条数
@@ -126,5 +127,34 @@ public class AccountDaoImpl implements AccountDao {
 
     }
 
-
+    @Override
+    public int getFuzzyQueryCount(Account account) {
+        Connection conn =  DBUtil.getPoolConnection();
+        StringBuilder sb = null;
+        try {
+            sb = new StringBuilder("SELECT COUNT(1) FROM t_account where 1 = 1 ");
+            if (account.getIdcardNo() != null ){
+                sb.append("and idcard_no like '%"+ account.getIdcardNo()+"%'");
+            }
+            if (account.getRealName() != null ){
+                sb.append(" and real_name like '%"+ account.getRealName()+"%'");
+            }
+            if (account.getLoginName() != null){
+                sb.append(" and login_name like '%"+ account.getLoginName() + "%'");
+            }
+            if (account.getStatus() != null && !account.getStatus().equals("-1")){
+                sb.append(" and status like '%"+ account.getStatus()+"%'");
+            }
+            PreparedStatement ps = conn.prepareStatement(sb.toString());
+            ResultSet rs =  ps.executeQuery();
+            rs.next();
+            return rs.getInt(1);
+        } catch (SQLException e) {
+            System.out.println("按页码查询账务账号条数失败！");
+            e.printStackTrace();
+        }finally {
+            DBUtil.closeConnection(conn);
+        }
+        return -1;
+    }
 }

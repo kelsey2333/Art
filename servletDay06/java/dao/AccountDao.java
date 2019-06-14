@@ -8,4 +8,5 @@ public interface AccountDao {
     List<Account> selectAll();
     List<Account> selectAllByPage(int pageNo ,int pageSize,Account account);
     int getSelectCount();
+    int getFuzzyQueryCount(Account account);
 }

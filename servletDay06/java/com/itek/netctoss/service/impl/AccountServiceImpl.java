@@ -33,4 +33,11 @@ public class AccountServiceImpl implements AccountService {
         AccountDao accountDao = new AccountDaoImpl();
         return accountDao.getSelectCount()/ Consts.PAGE_SIZE + accountDao.getSelectCount()%Consts.PAGE_SIZE;
 }
+
+    @Override
+    public int getFuzzyQueryEndPage(Account account) {
+        AccountDao accountDao = new AccountDaoImpl();
+        return accountDao.getFuzzyQueryCount(account)/ Consts.PAGE_SIZE + accountDao.getFuzzyQueryCount(account)%Consts.PAGE_SIZE;
+    }
+
 }

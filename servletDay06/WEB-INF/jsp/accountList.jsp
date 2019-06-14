@@ -9,7 +9,8 @@
         <title>宏晶信息－NetCTOSS</title>
         <link type="text/css" rel="stylesheet" media="all" href="${base}/styles/global.css" />
         <link type="text/css" rel="stylesheet" media="all" href="${base}/styles/global_color.css" />
-        <script src="jquery-1.4.3.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/WEB-INF/jsp/jquery-1.4.3.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/WEB-INF/jsp/json.js"></script>
         <script language="javascript" type="text/javascript">
             //删除
             function deleteAccount() {
@@ -71,8 +72,13 @@
                     <img src="${base}/images/close.png" onclick="this.parentNode.style.display='none';" />
                     删除成功，且已删除其下属的业务账号！
                 </div>   
-                <!--数据区域：用表格展示数据-->     
-                <div id="data">            
+                <!--数据区域：用表格展示数据-->
+
+                <div id="data">
+
+
+
+
                     <table id="datalist">
                     <tr>
                         <th>账号ID</th>
@@ -113,9 +119,12 @@
                             </td>
                         </tr>
                         </c:forEach>
-
-
                 </table>
+
+
+
+
+
                 <p>业务说明：<br />
                 1、创建则开通，记载创建时间；<br />
                 2、暂停后，记载暂停时间；<br />
@@ -174,10 +183,10 @@
 
                     <c:choose>
                         <c:when test="${curPage == endPage}">
-                            <a href="${base}/list.acc?pageNo=${endPage}">下一页</a>
+                            <a href="${base}/list.acc?pageNo=${endPage}&idCard=${param.idCard}&realName=${param.realName}&loginName=${param.loginName}">下一页</a>
                         </c:when>
                         <c:otherwise>
-                            <a href="${base}/list.acc?pageNo=${curPage + 1}">下一页</a>
+                            <a href="${base}/list.acc?pageNo=${curPage + 1}&idCard=${param.idCard}&realName=${param.realName}&loginName=${param.loginName}">下一页</a>
                         </c:otherwise>
                     </c:choose>
                     <a href="${base}/list.acc?pageNo=${endPage}">末页</a>

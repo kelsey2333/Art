@@ -34,14 +34,16 @@ public class AccountServlet extends HttpServlet {
         switch (uriStr){
             case "list":
                 AccountService accountService = new AccountServiceImpl();
+                //获取点击下一页的属性值
                 String pageNo = req.getParameter("pageNo");
                 int endPage = accountService.getAccountEndPage();
-
                 String idCard = req.getParameter("idCard");
                 String realName = req.getParameter("realName");
                 String loginName = req.getParameter("loginName");
                 String status = req.getParameter("status");
                 Account account = new Account(idCard,realName,loginName,status);
+                int fuzzyQueryEndPage = accountService.getFuzzyQueryEndPage(account);
+                System.out.println(fuzzyQueryEndPage+"======");
                 //都一次进去list.acc里没有传入任何pageNo，需设默认值pageNo为1；
                 if (pageNo == null){
                     pageNo = "1";
@@ -49,7 +51,11 @@ public class AccountServlet extends HttpServlet {
                 List<Account> accounts = accountService.selectAccountInfo(Integer.parseInt(pageNo),Consts.PAGE_SIZE ,account);
                 req.setAttribute("accounts" ,accounts);
                 req.setAttribute("curPage",pageNo);
-                req.setAttribute("endPage",endPage);
+                if (idCard != null||loginName != null||realName != null){
+                    req.setAttribute("endPage",fuzzyQueryEndPage);
+                }else {
+                    req.setAttribute("endPage",endPage);
+                }
                 //查询账号列表页
                 req.getRequestDispatcher("/WEB-INF/jsp/accountList.jsp").forward(req,resp);
                 break;

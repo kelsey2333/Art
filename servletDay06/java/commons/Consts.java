@@ -12,5 +12,5 @@ package commons;
  * @create: 2019-06-12 10:28
  **/
 public class Consts {
-    public static final int PAGE_SIZE = 10;
+    public static final int PAGE_SIZE = 3;
 }
