@@ -53,6 +53,7 @@
                     for (var i = 0;i < cities.length;i++){
                         $("#cities").append("<option value='"+ cities[i].code +"'>"+ cities[i].name +"</option>")
                     }
+                    getTowns();
                 }
             };
             ajax.open("get","/ajax/city.province?code=" + code,true);
@@ -76,6 +77,7 @@
             ajax.open("get","/ajax/town.province?code=" + code,true);
             ajax.send();
         }
+
     </script>
 </head>
 <body onload="getProvinces()">
@@ -84,7 +86,7 @@
         <option value="-1">--请选择--</option>
     </select>
     <label>城市</label>
-    <select id="cities" onchange="getTowns()" >
+    <select id="cities" onchange="getTowns()"  >
         <option value="-1">--请选择--</option>
     </select>
     <label>乡镇</label>
