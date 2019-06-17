@@ -3,7 +3,7 @@
  * @Date 2019/4/30
  * @Description
  */
-package com.itek.servletDay05.util;
+package util;
 
 
 import org.apache.commons.dbcp.BasicDataSource;
