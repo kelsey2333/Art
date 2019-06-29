@@ -5,18 +5,18 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
            version="3.0">
     <servlet>
-        <servlet-name>initServlet</servlet-name>
-        <servlet-class>com.itek.servlet.day04.initParamServlet</servlet-class>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
-            <!--参数名-->
-            <param-name>companyName</param-name>
-            <!--参数值-->
-            <param-value>itek</param-value>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring/spring-mvc.xml</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
-        <servlet-name>initServlet</servlet-name>
-        <url-pattern>/init/param</url-pattern>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>*.do</url-pattern>
     </servlet-mapping>
+
+
 
 </web-app>
