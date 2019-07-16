@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Function对象</title>
+    <script>
+        function test1() {
+            //arguments是一种特殊对象，表示参数数组。可以使用arguments访问所有参数，接收实际传入的参数进行操作
+            alert(arguments.length)
+            for (var i=0;i<arguments.length;i++){
+                alert(arguments[i]);
+            }
+        }
+        function test2() {
+            for (var i = 0;i<arguments.length;i++){
+                alert(arguments[i]);
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="argument对象" onclick="test1(10,20,30,40,50);">
+    <h1>模拟方法重载</h1>
+    <input type="button" value="test2('a','b','c','d','e')" onclick="test2('a','b','c','d','e');">
+    <input type="button" value="test2('a','b','c')" onclick="test2('a','b','c');">
+    <input type="button" value="test2('a')" onclick="test2('a');">
+</body>
+</html>

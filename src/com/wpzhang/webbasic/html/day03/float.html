@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>浮动定位</title>
+    <style>
+        .innerD1{
+            float:right;
+        }
+        /*取消浮动定位，使其有一行的空间*/
+        .cancelFloat{
+            clear:left;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="outer">
+        <div class="innerD1">innerD1</div>
+        <div class="innerD2">innerD2</div>
+        <p class="cancelFloat">浮动定位时，观察我的位置</p>
+    </div>
+
+</body>
+</html>

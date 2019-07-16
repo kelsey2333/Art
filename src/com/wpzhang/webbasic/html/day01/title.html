@@ -1,0 +1,66 @@
+<!--
+    注释：
+    DOCTYPE:用来声明编写的html版本，浏览器进行渲染时根据版本类型进行渲染
+
+    html文件都以.html/.htm为后缀
+    html文件有一个根节点（html）
+        -html有两个子节点
+            -head标签：头部声明的容器标签
+                -title:声明页面的标题
+                -meta:charset属性：设置页面的编码格式
+                -link
+                -style
+                -script
+            -body标签：用来加载渲染到浏览器进行显示
+                -文本元素
+                    -标题：<h1~6>:1~6级标题字体由大到小
+                    -段落：<p></p>:标签中的文本内容独占一行
+                    -列表：<p></p>:ol/ul有序和无序 li：list item
+                    -列表嵌套
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>百度一下，你就上当</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1 style="color:red">1级标题</h1>
+    <h2 style="color:hotpink">2级标题</h2>
+    <h4 style="color:plum">4级标题</h4>
+    <h6 style="color:lightpink;">6级标题</h6>
+
+    <h1 style="color:yellow;">文本元素-段落</h1>
+    hello world,hello world
+    hello world
+    <p>hello</p>
+    <p>world</p>
+
+    <h1 style="color:lightskyblue">文本元素-列表</h1>
+    <p>有序列表</p>
+    <ol>
+        <li>mlsong</li>
+        <li>jysu</li>
+        <li>xlyu</li>
+    </ol>
+
+    <p>无序列表</p>
+    <ul>
+        <li>mlsong</li>
+        <li>jysu</li>
+        <li>xlyu</li>
+    </ul>
+
+    <p>列表嵌套</p>
+    <ol>
+        <li>
+            mlsong
+            <ul>
+                <li> man</li>
+                <li>excellent man</li>
+            </ul>
+        </li>
+    </ol>
+
+</body>
+</html>

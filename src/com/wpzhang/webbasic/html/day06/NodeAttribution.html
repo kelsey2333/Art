@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>节点属性</title>
+    <script>
+        function nodeAttribution(){
+            //改变节点的颜色为：red 改变节点的字体大小为20 节点名字改为样式类名称
+            var nodeObj = document.getElementById("p1");
+            // nodeObj.style.color = "red";
+            // nodeObj.style.fontSize = 20;
+            nodeObj.className = "nodeAttribution2";
+        }
+    </script>
+    <style>
+        .nodeAttribution2{
+            color: red;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <p class="nodeAttribution2">一周畅销书</p>
+    <p id="p1" class="nodeAttribution">一周畅销书</p>
+    <button onclick="nodeAttribution();">获取节点属性</button>
+</body>
+</html>

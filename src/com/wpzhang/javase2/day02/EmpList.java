@@ -24,8 +24,8 @@ public class EmpList {
         e.add(new Emp("kelsey", 23, "girl", 4000));
         e.add(new Emp("you", 18, "girl", 3000));
         e.add(new Emp("she", 19, "girl", 3500));
-        System.out.println(e);
-        FileOutputStream fos = null;
+        FileOutputStream fos = null;        System.out.println(e);
+
         try {
             fos = new FileOutputStream("E:/壁纸/a.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);

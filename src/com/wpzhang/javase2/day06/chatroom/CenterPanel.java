@@ -28,7 +28,6 @@ public class CenterPanel extends JSplitPane {
     private static JList userList;//用户列表
     private static DefaultListModel listModel;//存放用户信息，可以在userList中显示
 
-
     //初始化成员面板和组件变量
     static {
         /*

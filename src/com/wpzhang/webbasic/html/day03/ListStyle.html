@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>列表样式</title>
+    <style>
+        .u1{
+            list-style-type: circle;
+        }
+        .o1{
+            list-style-type: upper-roman;
+        }
+        .open{
+            list-style-image: url("images/open.jpg");
+        }
+        .outer{
+            border: 1px solid #0488bb;
+            width:500px;
+            height:50px;
+        }
+        /*通过设置li的属性设置两列表之间的距离*/
+        li{
+            float:right;
+            margin-right: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <ol class="o1">
+            <li>小学</li>
+            <li>初中</li>
+            <li>高中</li>
+            <li>大学</li>
+        </ol>
+    </div>
+    <ul class="u1">
+        <li>足球</li>
+        <li>足球</li>
+        <li>足球</li>
+    </ul>
+
+    <ul class="open">
+        <li class="open">
+            部门管理
+            <ul>
+                <li class="add">添加部门</li>
+                <li class="modify">修改部门</li>
+                <li class="remove">删除部门</li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>

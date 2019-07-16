@@ -11,7 +11,7 @@ package com.wpzhang.oop.day03;
  * @author: wpzhang
  * @create: 2019-03-14 16:43
  **/
-public class TetrominoJ extends Tetromino{
+public class TetrominoJ extends Tetromino {
     public TetrominoJ(int row,int col){
         //对四块积木单元格进行初始化
         cells[0] = new Cell(row, col);

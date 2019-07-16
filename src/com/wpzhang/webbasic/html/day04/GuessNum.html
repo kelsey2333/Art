@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>猜数字</title>
+    <script>
+        function getVal() {
+           var inputobj=document.getElementById("inputVal");
+           var inputval=inputobj.value;
+            var num = parseFloat(inputval);
+            if(isNaN(num)){
+            //不是一个数
+                alert("您输入的不是一个数");
+            }else{
+                //和内置数进行比较
+                var standard = 20;
+                if (num<standard){
+                    alert("小了")
+                } else if (num>standard){
+                    alert("大了")
+                }else{
+                    alert("您猜对了！")
+                }
+            }
+        }
+        function getPlusVal() {
+            var inputObj=document.getElementById("inputNum")
+            var num1 = inputObj.value;
+            var num = parseFloat(num1);
+            if (isNaN(num)){
+                alert("您输入的不是一个数")
+            }else {
+                alert("平方得："+ num*num)
+            }
+        }
+        function equal() {
+            var a = "10";
+            var b = 10;
+            var c = 10;
+            if (a==b){
+                alert("equal")
+            }
+            if (a===b){
+                alert("same")
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>猜数字</h1>
+    <input id="inputVal" type="text">
+    <input type="button" value="点我获取值" onclick="getVal();">
+
+    <h1>计算平方</h1>
+    <input id="inputNum" type="text">
+    <input type="button" value="平方得" onclick="getPlusVal();">
+</body>
+</html>

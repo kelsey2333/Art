@@ -51,6 +51,7 @@ public class Tetromino {
             }
             System.out.println();
         }
+        print();
     }
 
     public void Drop() {
@@ -96,11 +97,11 @@ public class Tetromino {
                     break;
                 case 3:
                     moveRight(1);
+                    break;
                 default:
-                    Drop();
             }
-            print();
         }
+
     }
 }
 

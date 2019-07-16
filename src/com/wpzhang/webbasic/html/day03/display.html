@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>改变显示样式</title>
+    <style>
+        .toBlock{
+            border: 1px solid;
+            display: block;
+        }
+        .toInline{
+            border: 1px solid;
+            display:inline;
+        }
+        .toNone{
+            border:1px solid;
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <span class="toBlock">转换成块测试</span>
+    <!--不显示该元素并且释放其位置-->
+    <img class="toNone" src="images/open.jpg">
+    <!--块元素转换成行内元素-->
+    <p class="toInline" >好多照片</p>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CSS特性</title>
+    <style>
+        span{color:red;}
+    </style>
+</head>
+<body>
+
+    <h1>继承性</h1>
+    <div style="color: orange;font-size: 32px;">
+        <p>
+            父元素的Css声明可以被子元素继承，字体颜色等。
+        </p>
+    </div>
+
+    <h1>层叠性</h1>
+    <span style="font-size: 23px">同一个元素若存在多个css规则。对于不冲突的声明可以叠加</span>
+
+    <h1>优先级</h1>
+    <p>
+        优先级最高的是内联样式
+        其次是内部样式和外部样式；若同时又内部和外部样式，则离元素最近的优先级高
+        最后是浏览器默认样式
+    </p>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CSS选择器</title>
+    <style>
+        /*元素选择器*/
+        h1{
+            color:pink;
+        }
+
+        /*类选择器*/
+        .bluecolor{
+            color:blue;
+        }
+        .important{
+            color:red;
+        }
+        /* id选择器*/
+        #div1{
+            color:orangered;
+        }
+        /*
+        元素选择器和类选择器组合使用
+        选择所有h3标签并且是class值是important值得
+        */
+      h3.important{
+          color:purple;
+      }
+
+    </style>
+</head>
+<body>
+
+    <h1>元素选择器</h1>
+    <!--
+    元素（标签）名{
+        属性：值
+        属性：值
+        ...
+    }
+    选中当前html页面中的所有元素标签，统一设置选中元素标签的样式
+    -->
+    <h1>类选择器</h1>
+    <!--
+    类名{
+        属性：值
+        属性：值
+        ...
+    }
+
+    -->
+    <h2 class="bluecolor">二级标题</h2>
+    <h3 class="bluecolor">三级标题</h3>
+    <h3 class="important">三级标题</h3>
+
+    <h1>id选择器</h1>
+    <!--选择所有id选择器和id值相同的元素-->
+    <div id ="div1">
+        我的id为div1
+    </div>
+
+    <h1>后代选择器</h1>
+
+    <p>
+        合肥市
+        <strong>高新区</strong>
+        <span>
+            创新产业园
+            <strong>
+                    F14栋
+            </strong>
+        </span>
+    </p>
+    <strong>12层</strong>
+
+    <h>子选择器</h>
+
+    <p>
+        合肥市<u>高新区望江西路800号</u>
+        <strong>创新产业园</strong>
+        B1栋9层
+    </p>
+    p>strong{
+    font-size:30px;
+    }
+
+</body>
+</html>

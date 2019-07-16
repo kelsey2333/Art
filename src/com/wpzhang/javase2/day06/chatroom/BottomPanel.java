@@ -21,19 +21,30 @@ public class BottomPanel extends JPanel {
      */
     private  JTextField sendText;
     private  JButton sendBtn;
+    private JButton cancelBtn;
 
     //初始化底部面板组件
     public BottomPanel() {
         sendText = new JTextField();
-        sendBtn = new JButton("send ");
+        sendBtn = new JButton("send");
+        cancelBtn = new JButton("cancel");
         //设置面板布局 XX行XX列
-        setLayout(new BorderLayout());
+        setLayout(new GridLayout(1,4));
         //将组件添加到面板上：
-        add(sendText, "Center");
-        add(sendBtn, "East");
+        add(sendText);
+        add(sendBtn);
+        add(cancelBtn);
 
         //设置面板边界属性
         setBorder(new TitledBorder("send area"));
+    }
+
+    public JButton getCancelBtn() {
+        return cancelBtn;
+    }
+
+    public void setCancelBtn(JButton cancelBtn) {
+        this.cancelBtn = cancelBtn;
     }
 
     public JTextField getSendText() {

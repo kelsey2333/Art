@@ -15,7 +15,6 @@ public class Cell {
     //定义成员变量行和列
     int row;
     int col;
-
     //构造器
     public Cell(int row, int col) {
         this.row = row;

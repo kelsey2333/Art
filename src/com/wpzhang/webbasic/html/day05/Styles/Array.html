@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Array对象</title>
+    <script>
+        function test() {
+            //创建数组对象
+            var a1 = new Array();
+            var a2 = new Array(7);
+            var a3 = new Array(100,"a",true);
+            var a4 = [100,200,300]
+            //数组的长度是可变的
+            a1[0]= 1;//长度变为1
+            console.log(a1[0]);
+            console.log(a3[1]);
+            //创建二维数组
+            var arr = [
+                [1,2,3],
+                ['a','b'],
+                ['你好']
+            ];
+            console.log(arr);
+            //数组倒转与排序
+            var arr1 = [32,12,111,444];
+            arr1.sort();
+            alert(arr1.toString());//111,12,32,444先排第一位：第一位相等的情况下排第二位
+            arr1.sort(sortFunc);
+            //传入的是比较规则，传入规则后排序方法就变了
+            alert(arr1.toString());
+        }
+        function sortFunc(a,b) {
+            //类似于comparable
+            return a-b;
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="测试array" onclick="test();">
+</body>
+</html>

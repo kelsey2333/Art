@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>String常用方法</title>
+    <script>
+        function StringMethod() {
+            var str1="JavaScript网页教程";
+            var str2 = str1.charAt(12);
+            alert(str2);
+            var str3 = str1.charCodeAt(1);
+            alert(str3);
+            var str4 = str1.indexOf("a")
+            alert(str4);
+            var str5 = str1.lastIndexOf("a")
+            alert(str5);
+            var str6 = "abcdefgh";
+            var str7 = str6.substring(2,4);
+            alert(str7);
+            var str8 = str6.replace("cd","aaa");
+            alert(str8);
+            var str9 = str6.split("d",2);
+            alert(str9);
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="获取字符或编码" onclick="StringMethod();">
+</body>
+</html>

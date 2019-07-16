@@ -1,4 +1,5 @@
-8、队列：FIFO先进先出
+8、都属于LinkedList造型成不同的引用
+   队列：FIFO先进先出
    栈：FILO先进后出
 day05
 1、Map解控定义的集合又称查找表，用于存储“Key-Value”映射对。key可以作为Value

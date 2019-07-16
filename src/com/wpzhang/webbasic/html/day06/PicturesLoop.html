@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图片</title>
+    <script>
+        function loopPictures(){
+            // var o = document.getElementById("p1");
+            // o.src = "images/1.jpg";
+            // o.src = "images/" + index + ".jpg"
+            var newNode = document.createElement("img");
+            newNode.src = "images/2.jpg";
+            document.getElementById("p1").src = newNode.src;
+        }
+    </script>
+    <style>
+        .pictureWall{
+            border: 1px solid;
+            height: 200px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="pictureWall">
+        <img id="p1" class="picture1" src="images/1.jpg">
+    </div>
+    <div>
+        <img class="picture2" src="images/2.jpg">
+    </div>
+    <button onclick="setTimeout(loopPictures,1000)">轮播图片</button>
+</body>
+</html>

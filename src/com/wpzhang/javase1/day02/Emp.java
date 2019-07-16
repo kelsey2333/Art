@@ -5,14 +5,17 @@
  */
 package com.wpzhang.javase1.day02;
 
+import java.io.Serializable;
+
 /**
  * @program: Wpzhang
  * @description: 重写Emp类
  * @author: wpzhang
  * @create: 2019-03-28 05:54
  **/
-public class Emp {
+public class Emp implements Serializable {
 
+    private static final long serialVersionUID = -6877465049982069539L;
     String name;
     int age;
     String gender;

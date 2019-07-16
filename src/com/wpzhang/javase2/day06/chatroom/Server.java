@@ -5,6 +5,7 @@
  */
 package com.wpzhang.javase2.day06.chatroom;
 
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,14 +33,18 @@ public class Server extends JFrame {
     private ServerTopPanel top;
     private CenterPanel center;
     private BottomPanel bottom;
-    private static final int ONLINE_USERS = 1;
+
+    private static final String ONLINE_USERS = "onlineusers";
+    private static final String CLIENT_TO_CLIENT = "clientToClient";
+    private static final String PRIVATE_TALK = "privateTalk";
+    private static final String GROUP_TALK = "groupTalk";
+    private static final String CANCEL = "cancel";
 
     /*
     服务器端面板信息连接组件
      */
     private int port;
     private ServerSocket server;
-    private BufferedReader br;
     private String nickname;
     private String nameOfUser;
 
@@ -74,131 +79,251 @@ public class Server extends JFrame {
         this.setVisible(true);
     }
 
+    /*
+    构造器
+     */
+
     public Server() {
         initComponent();
         initFrameConfig();
         addBtnsAction();
     }
 
+    /**
+     * @return
+     * @Param
+     * @description 添加按钮响应的方法
+     * @date 2019/4/18 23:43
+     */
+
     private void addBtnsAction() {
         starBtnAction();
     }
 
+    /**
+     * @return
+     * @Param
+     * @description 开始按钮响应事件
+     * @date 2019/4/18 23:44
+     */
+
     private void starBtnAction() {
-        JButton ConnBtn = top.getConnBotton();
-        ConnBtn.addActionListener(new ActionListener() {
+
+        top.getConnBotton().addActionListener(new ActionListener() {
             /*
             给start添加了连接点击响应，当点击了该按钮就执行actionPerformed任务
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                //获取端口号
-                String str = top.getPortText().getText();
-                checkPort(str);
-                port = Integer.valueOf(str);
+                //获取端口
+                getPortInfo();
                 //创建Socket对象
-                try {
-                    //将建立好的服务器端保存起来
-                    server = new ServerSocket(port);
-                } catch (IOException e1) {
-                    CenterPanel.getContentArea().append(buildMsgNotice("服务器启动失败！"));
-                }
-                CenterPanel.getContentArea().append(buildMsgNotice("服务器启动成功!"));
-                  /*
-                    循环监听（为了多个客户端都可以连接），建立连接，
-                    且必须创建监听线程（若不创建，程序就会被阻塞在accept前）
-                     */
-                Thread acceptTh = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        /*
-                        循环监听
-                         */
-                        while (true) {
-                            try {
-                                Socket client = server.accept();
-                                //监听到客户端，建立连接成功后立即接受用户即刻发送过来的昵称(循环读取)
-                                br = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                                nickname = br.readLine();
-                                //接收到的昵称保存到clients集合中
-                                clients.put(nickname, client);
-                                //将客户端用户登录信息显示到内容显示区域
-                                CenterPanel.getContentArea().append(buildMsgNotice(nickname + "已经登录服务器！"));
-
-                                //将的登录成功的用户输出到登录用户列表区
-                                CenterPanel.getListModel().addElement(nickname);
-
-                                //获取到用户名
-                                StringBuilder sb = new StringBuilder();
-                                for (int i = 0; i < CenterPanel.getListModel().getSize(); i++) {
-                                    //get()方法中返回的elementDate是一个Object[],所以要强制转换为String类型
-                                    nameOfUser = (String) CenterPanel.getListModel().get(i);
-                                    sb.append(nameOfUser).append(",");
-                                }
-                                System.out.println(sb.toString());
-
-                                /*
-                                将所有的在线用户广播给客户端
-                                    -1、以一种协议发送给客户端
-                                    -2、用户接收该协议并解析(客户端工作)
-                                    -3、将解析出来的在线用户输出到用户列表区域（客户端工作）
-                                 */
-
-                                //1-1 以一种协议1@server:client1(client2)(client3)
-                                String sendMsg = buildServerSendMsg(ONLINE_USERS, "server", sb.toString());
-                                /*
-                                 1-2 遍历客户端，将协议发送给客户端  获取输出流, 向该客户端发送登录用户信息
-                                    （写出去的时候是不需要线程的，因为写出去的时候没有线程争抢）
-                                 */
-                                Set<Map.Entry<String, Socket>> entrySet = clients.entrySet();
-
-                                for (Map.Entry<String, Socket> entry : entrySet) {
-                                    //获取Socket对象cli
-                                    Socket cli = entry.getValue();
-                                    PrintWriter clipw = new PrintWriter(cli.getOutputStream(), true);
-                                    clipw.println(sendMsg);
-                                }
-                               //循环接收客户端发送过来的信息
-                                Thread receiveTh = new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        try {
-                                            String receiveMsg = br.readLine();
-                                            CenterPanel.getContentArea().append(buildReceiveNoticeMsg(nickname, receiveMsg));
-                                        } catch (IOException e1) {
-                                            e1.printStackTrace();
-                                        }
-                                    }
-                                });
-                                receiveTh.start();
-
-                            } catch (IOException e1) {
-                                CenterPanel.getContentArea().append(buildMsgNotice("客户端建立连接失败！"));
-                            }
-                            CenterPanel.getContentArea().append(buildMsgNotice("客户端建立连接成功！"));
-                        }
-                    }
-                });
-                acceptTh.start();
+                creatServer();
+                //创建监听线程，让该线程循环监听客户端的建立
+                creatAcceptThread();
             }
-
         });
-
     }
-     /*
-    正则检验端口
-    -分成几部： 60000-65535；10000-59999；1000-9999；100-999；10-99；0-9；
+
+    /**
+     * @return
+     * @Param
+     * @description 创建并启动监听线程
+     * @date 2019/4/15 17:33
      */
 
-    public boolean checkPort(String port){
-        String portNum =  "([0-9]|[1-9]\\d{1,3}|[1-5]\\d{4}|6[0-4]\\d{4}|65[0-4]\\d{2}|655[0-2]\\d|6553[0-5])";
-        if (port != null && port.matches(portNum)){
-            return  true;
-        }else{
-            return false;
+    private void creatAcceptThread() {
+         /*
+           循环监听（为了多个客户端都可以连接），建立连接，
+            且必须创建监听线程（若不创建，程序就会被阻塞在accept前）
+          */
+        Thread acceptTh = new Thread(new Runnable() {
+            @Override
+            public void run() {
+            /*
+            循环监听
+            */
+                while (true) {
+                    try {
+                        //创建客户端连接，并且保存客户端信息
+                        String nickname = creatClientLink();
+                        //广播在线用户列表
+                        boardcastOnlineUsers();
+                        //创建接收线程，循环接收当前建立客户端发送过来的数据
+                        creatReceiveThread(nickname, clients.get(nickname));
+                        //显示提示信息
+                        CenterPanel.getContentArea().append(buildMsgNotice("客户端建立连接成功！"));
+                    } catch (IOException e1) {
+                        CenterPanel.getContentArea().append(buildMsgNotice("客户端建立连接失败！"));
+                    }
+                }
+            }
+        });
+        acceptTh.start();
+    }
+
+    /**
+     * @return
+     * @Param
+     * @description 广播在线用户列表
+     * @date 2019/4/15 17:31
+     */
+
+    private void boardcastOnlineUsers() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < CenterPanel.getListModel().getSize(); i++) {
+            nameOfUser = (String) CenterPanel.getListModel().get(i);
+            sb.append(nameOfUser).append(",");
+        }
+        //发送协议
+        String sendMsg = buildServerSendMsg(ONLINE_USERS, "server", sb.toString());
+        // 遍历客户端，将协议发送给客户端  获取输出流, 向该客户端发送登录用户信息
+        Set<Map.Entry<String, Socket>> entrySet = clients.entrySet();
+        for (Map.Entry<String, Socket> entry : entrySet) {
+            //获取Socket对象cli
+            Socket cli = entry.getValue();
+            PrintWriter clipw = new PrintWriter(cli.getOutputStream(), true);
+            clipw.println(sendMsg);
         }
     }
 
+    /**
+     * @return
+     * @Param
+     * @description 建立连接，保存客户端信息，返回昵称
+     * @date 2019/4/15 17:30
+     */
+
+    private String creatClientLink() throws IOException {
+        Socket client = server.accept();
+        //监听到客户端，建立连接成功后立即接受用户即刻发送过来的昵称(循环读取)
+        BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()));
+        nickname = br.readLine();
+        //接收到的昵称保存到clients集合中
+        clients.put(nickname, client);
+        //将客户端用户登录信息显示到内容显示区域
+        CenterPanel.getContentArea().append(buildMsgNotice(nickname + "已经登录服务器！当前在线人数：" + clients.size() + "\n"));
+        //将的登录成功的用户输出到登录用户列表区
+        CenterPanel.getListModel().addElement(nickname);
+        return nickname;
+    }
+
+    /**
+     * @return
+     * @Param
+     * @description 创建监听线程，用来接收当前客户端发送过来的数据
+     * @date 2019/4/15 17:34
+     */
+
+    private void creatReceiveThread(String nickname, Socket clientSocket) {
+        //循环接收客户端发送过来的信息
+        Thread receiveTh = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        BufferedReader br = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                        String receiveMsg = br.readLine();
+                        System.out.println("接收客户端发送过来的消息：" + receiveMsg);
+                        //解析方法：parsetype  parsenickname  parsecontent
+                        String type = parsetype(receiveMsg);
+                        String name = parsename(receiveMsg);
+                        String content = parsecontent(receiveMsg);
+                        switch (type) {
+                            case CLIENT_TO_CLIENT:
+                                //1、获取客户端要私聊的用户组件
+                                Socket clientSocket = clients.get(name);
+                                //2、获取客户端输出流，输出信息
+                                PrintWriter clientPw = new PrintWriter(clientSocket.getOutputStream(), true);
+                                //3、构造发送协议，向用户发送数据
+                                String sendMsg = buildServerSendMsg(PRIVATE_TALK, nickname, content);
+                                System.out.println(sendMsg);
+                                clientPw.println(sendMsg);
+                                //提示到内容显示区域：xxx对xxx说：
+                                CenterPanel.getContentArea().append(buildReceiveNoticeMsg(nickname, name, content));
+                                //System.out.println("xxx对xxx说");
+                                break;
+                            case GROUP_TALK:
+                                // 遍历客户端, 群发
+                                Set<Map.Entry<String, Socket>> entrySet = clients.entrySet();
+                                for (Map.Entry<String, Socket> entry : entrySet) {
+                                    // 获取客户端通信Socket对象
+                                    Socket cli = entry.getValue();
+                                    // 获取输出流, 向该客户端发送消息
+                                    PrintWriter cliPw = new PrintWriter(cli.getOutputStream(), true);
+                                    cliPw.println(buildServerSendMsg(GROUP_TALK, nickname, content));
+                                }
+                                CenterPanel.getContentArea().append(nickname + "对全体成员说:\n" + content + "\n");
+                                break;
+                            case CANCEL:
+                                // 遍历客户端, 群发
+                                Set<Map.Entry<String, Socket>> entrySet2 = clients.entrySet();
+                                for (Map.Entry<String, Socket> entry : entrySet2) {
+                                    // 获取客户端通信Socket对象
+                                    Socket cli = entry.getValue();
+                                    // 获取输出流, 向用户列表区的用户发送消息：content为“撤回了一条信息！”
+                                    PrintWriter cliPw = new PrintWriter(cli.getOutputStream(), true);
+                                    cliPw.println(buildServerSendMsg(CANCEL, nickname, content));
+                                }
+                                CenterPanel.getContentArea().append(nickname + content + "\n");
+                                break;
+                        }
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            }
+        });
+        receiveTh.start();
+    }
+
+    /**
+     * @return
+     * @Param
+     * @description 启动服务器
+     * @date 2019/4/15 17:35
+     */
+
+    private void creatServer() {
+        try {
+            //将建立好的服务器端保存起来
+            server = new ServerSocket(port);
+        } catch (IOException e1) {
+            CenterPanel.getContentArea().append(buildMsgNotice("服务器启动失败！"));
+        }
+            CenterPanel.getContentArea().append(buildMsgNotice("服务器启动成功!"));
+    }
+
+    /**
+     * @return void
+     * @Param
+     * @description 获取端口号
+     * @date 2019/4/15 17:35
+     */
+
+    private void getPortInfo() {
+        String str = top.getPortText().getText();
+        if (checkPort(str) == false) {
+            CenterPanel.getContentArea().append("端口格式错误！\n");
+        }
+        port = Integer.valueOf(str);
+    }
+
+    /**
+     * @return
+     * @Param 分成几部： 60000-65535；10000-59999；1000-9999；100-999；10-99；0-9
+     * @description 正则校验端口
+     * @date 2019/4/17 13:48
+     */
+
+    public boolean checkPort(String port) {
+        String portNum = "([0-9]|[1-9]\\d{1,3}|[1-5]\\d{4}|6[0-4]\\d{4}|65[0-4]\\d{2}|655[0-2]\\d|6553[0-5])";
+        if (port != null && port.matches(portNum)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * @return
@@ -206,12 +331,12 @@ public class Server extends JFrame {
      * @description 构造接收提示格式方法
      * @date 2019/4/13 15:21
      */
-    private String buildReceiveNoticeMsg(String nickname, String receiveMsg) {
+
+    private String buildReceiveNoticeMsg(String fromName, String toName, String receiveMsg) {
         StringBuilder sb = new StringBuilder();
-        sb.append(nickname).append("对我说：").append("\n").append("\t").append(receiveMsg);
+        sb.append(fromName).append("对" + toName + "说：").append("\n").append("\t").append(receiveMsg).append("\n");
         return sb.toString();
     }
-
 
     /**
      * @return String
@@ -219,6 +344,7 @@ public class Server extends JFrame {
      * @description 构造提示信息格式方法
      * @date 2019/4/13 9:40
      */
+
     public String buildMsgNotice(String notice) {
         StringBuilder sb = new StringBuilder();
         sb.append("[提示信息]:").append(notice).append("\n");
@@ -231,10 +357,52 @@ public class Server extends JFrame {
      * @description 构造“将用户信息广播给客户端”的发送协议
      * @date 2019/4/13 11:33
      */
-    public String buildServerSendMsg(Integer note, String nameOfSender, String nameOfReceiver) {
+
+    public String buildServerSendMsg(String note, String nameOfSender, String nameOfReceiver) {
         StringBuilder sb = new StringBuilder();
         sb.append(note).append("@").append(nameOfSender).append(":").append(nameOfReceiver);
-        return nameOfReceiver;
+        return sb.toString();
+    }
+
+    /**
+     * @return type
+     * @Param
+     * @description 解析type
+     * @date 2019/4/13 14:03
+     */
+
+    public String parsetype(String str) {
+        int index1 = str.indexOf("@");
+        System.out.println(index1);
+        System.out.println(str);
+        return str.substring(0, index1);
+    }
+
+    /**
+     * @return name
+     * @Param
+     * @description 解析name
+     * @date 2019/4/13 14:07
+     */
+
+    public String parsename(String str) {
+        int index1 = str.indexOf("@");
+        int index2 = str.indexOf(":");
+        String name = str.substring(index1 + 1, index2);
+        return name;
+    }
+
+    /**
+     * @return content
+     * @Param
+     * @description 解析content
+     * @date 2019/4/13 14:15
+     */
+
+    public String parsecontent(String str) {
+        int index2 = str.indexOf(":");
+        String content = str.substring(index2 + 1);
+        return content;
     }
 
 
@@ -261,6 +429,13 @@ public class Server extends JFrame {
     public void setBottom(BottomPanel bottom) {
         this.bottom = bottom;
     }
+
+    /**
+     * @Param
+     * @description 程序执行入口
+     * @date 2019/4/18 23:50
+     * @return
+     */
 
     public static void main(String[] args) {
         new Server();

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>获取标签内的文本或者HTML</title>
+    <script>
+        function getTxtAndHTML(){
+            var div = document.getElementById("div1")
+            var str = div.innerText + "\n" + div.innerHTML;
+            alert(str);
+        }
+    </script>
+</head>
+<body>
+    <div id = "div1">
+        第一行文本<p>段落中的文本</p>
+    </div>
+    <button onclick="getTxtAndHTML()">文本还是HTML形式</button>
+</body>
+</html>

@@ -34,7 +34,7 @@ public class DeleteTest {
      * @date 2019/3/26 6:22
      * @return void
      */
-
+//TODO 为什么不是几万个字
     public void testGenerateChineseCharecter() {
         //生成一个从"一"\u4e00到\u9fa5
         //包含所有汉字，所以要用循环

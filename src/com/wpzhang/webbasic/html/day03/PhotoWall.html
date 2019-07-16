@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>照片墙</title>
+    <style>
+        body{
+            margin:0px;
+            /*墙垂直居中*/
+            padding-top: 60px;
+        }
+        .outer{
+            /*墙水平居中*/
+            margin: auto;
+            border:1px solid;
+            width:700px;
+            background-color: pink;
+        }
+        .p1,.p4{
+            position:relative;
+            left:20px;
+        }
+        .p2,.p5{
+            position:relative;
+            left:40px;
+        }
+        .p3,.p6{
+            position:relative;
+            left:60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer">
+            <img class="p1"src="images/1.jpg">
+            <img class="p2"src="images/2.jpg">
+            <img class="p3"src="images/3.jpg">
+            <img class="p4"src="images/4.jpg">
+            <img class="p5"src="images/5.jpg">
+            <img class="p6"src="images/6.jpg">
+    </div>
+</body>
+</html>

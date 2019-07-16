@@ -19,6 +19,26 @@ public class TetrominoT extends Tetromino {
         cells[2] = new Cell(row, col + 2);
         cells[3] = new Cell(row + 1, col + 1);
     }
+        public void print () {
+            int rowCount = 10;
+            int colCount = 10;
+            for (int row = 1; row < rowCount; row++) {
+                for (int col = 1; col < colCount; col++) {
+                    boolean isCell = false;
+                    for (int i = 0; i < cells.length; i++) {
+                        if (col == cells[i].col & row == cells[i].row) {
+                            isCell = true;
+                        }
+                    }
+                    if (isCell) {
+                        System.out.print("* ");
+                    } else {
+                        System.out.print("- ");
+                    }
+                }
+                System.out.println();
+            }
 
+        }
+    }
 
-}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>input表单控件</title>
+</head>
+<body>
+
+    <h1>input-文本框，密码框</h1>
+    <!--
+        form:采集获取标签中间表单空间的数据
+        将采集到的数据提交到action指定的服务器上
+        method:指定的数据的提交方式
+    -->
+    <form action="https://www,baidu.com" method="get">
+        <!--
+            文本框/密码框
+            value:设置输入框默认显示内容，采集的数据都是通过value属性保存
+            maxlength:设置输入框输入最大字符个数
+            readonly:设置输入框为只读
+        -->
+        文本框<input type="text" name="username"  maxlength="10"/><br>
+        密码框<input type="password"/>
+        <!--相当于按钮-->
+        <input type="submit"value="提交数据">
+    </form>
+</body>
+
+
+    <h1>单选框和复选框</h1>
+    <form action="http://www.baidu.com">
+        <!--
+            通过name属性
+            checked:用来设置选项默认选中按钮
+        -->
+        <!--单选框-->
+        <input type="radio" name="gender" value="man"checked>男
+        <input type="radio" name="gender" value="girl" checked>女
+        <br>
+        <!--复选框-->
+        <input type="checkbox" name="hobbies"value="drink">喝酒
+        <input type="checkbox" name="hobbies"value="drink">抽烟
+        <br>
+        <input type="checkbox" name="items" value="java">java
+        <input type="checkbox" name="items" value="C++">C++
+        <br>
+        <input type="submit" value="提交数据">
+        <input type="reset" value="重置">
+        <input type="button"value="普通按钮"onclick="alert('你点我了');">
+    </form>
+
+
+    <h1>隐藏域和文件选择框</h1>
+    <form action="http://www.baidu.com">
+        <!--
+        隐藏域：不会咋页面上显示任何内容 hidden
+        文件选择框：上传文件 file
+        -->
+        <input type="hidden" name="loginuser" value="mlsong">
+        <input type="file">
+
+        <input type="submit" value="提交数据">
+
+    </form>
+
+    <h1>标签</h1>
+    <input id="remember" type="checkbox"><label for="remember">记住我</label>
+
+    <h1>文本域</h1>
+    <textarea rows="2">合肥市高新区创新产业园二期F4栋12层</textarea>
+
+    <h1>下拉选</h1>
+    <select>
+        <option value="1">java</option>
+        <option value="2">php</option>
+        <option value="3">.net</option>
+    </select>
+
+</html>

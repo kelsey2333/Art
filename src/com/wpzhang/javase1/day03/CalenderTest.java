@@ -41,7 +41,7 @@ public class CalenderTest {
     /**
      * @return void
      * @Param
-     * @description setTimr
+     * @description setTime
      * @date 2019/3/29 20:18
      */
     @Test
@@ -79,7 +79,7 @@ public class CalenderTest {
         int dayOfWeek = c3.get(Calendar.DAY_OF_WEEK);
         System.out.println(dayOfWeek);//周三
         System.out.println(c3.getTime());
-        SimpleDateFormat C4 = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println(C4.format(c3.getTime()));
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd").format(c3.getTime()));
+
     }
 }

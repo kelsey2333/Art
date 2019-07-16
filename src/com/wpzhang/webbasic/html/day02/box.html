@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HTML盒子模型</title>
+    <style>
+        #box{
+            /*这里的宽高是文本内容外部的边框（border）宽高*/
+            border: 2px solid blue;
+            width:150px;
+            height:30px;
+            margin:50px;
+            padding:2px;
+        }
+        .d2{
+            padding:10px;
+            margin:30px;
+            background-color: #ccc;
+        }
+        .d3{
+            /*TODO 这里的第二个像素改变为什么没有反应？？*/
+            border:1px dashed red;
+            padding:1px;
+            /*自动的边缘是紧贴着的，没有边缘空白*/
+            margin:2px auto;
+
+        }
+    </style>
+</head>
+<body>
+    <h1>盒子宽高设置</h1>
+    <div id="box">
+        盒子模型中的宽和高
+    </div>
+
+    <h1>盒子四边设置</h1>
+    <div class="d2">四边设置测试内容</div>
+
+    <h1>单边设置</h1>
+    <div class="d3">
+        单边设置测试内容
+    </div>
+</body>
+</html>

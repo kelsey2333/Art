@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <script src="jquery-1.4.3.js"></script>
+    <script>
+        var totalPrice = 0;
+
+        //绑定三个按钮的点击响应事件
+        $(function () {
+           $("#btn1,#btn2,#btn3").click(addProducts);
+        });
+
+       //添加商品到购物车
+        function addProducts(){
+            //获取购物出中的商品名称
+            //获取+按钮所在行的tr
+            var trjq = $(this).parent().parent();
+            //获取商品名称，商品单价，商品数量，
+            var name = trjq.children("td:eq(0)").text();
+            var price = parseFloat(trjq.children("td:eq(1)").text());
+            var count = parseFloat(trjq.children("td:eq(2)").children("input").val());
+
+            //将商品追加到购物车表格中有
+            //如果下面的购物车该商品。就只改变商品数量和商品小计
+            if ($("#cartBody").children().children("td:eq(0)")== "鼠标"){
+                var appendTr = $("<tr>" +
+                    "<td>" + name + "</td>" +
+                    "<td>" + price +"</td>" +
+                    "<td>" + count + "</td>" +
+                    "<td>" + (count*price).toFixed(1) + "</td>" +
+                    "<td><button onclick='removetr(this)'>删除</button><button onclick='minusCount(this,1)'>+</button><button onclick='minusCount(this,-1)'>-</button></td>"+
+                    "</tr>");
+            }
+            var appendTr = $("<tr>" +
+                "<td>" + name + "</td>" +
+                "<td>" + price +"</td>" +
+                "<td>" + count + "</td>" +
+                "<td>" + (count*price).toFixed(1) + "</td>" +
+                "<td><button onclick='removetr(this)'>删除</button><button onclick='minusCount(this,1)'>+</button><button onclick='minusCount(this,-1)'>-</button></td>"+
+                "</tr>");
+            //创建的节点追加到购物车
+            $("#cartBody").append(appendTr);
+
+            //计算总价
+            totalPrice += price*count;
+            //更新到表格中
+            $("#total").text(totalPrice);
+        }
+
+        function minusCount(e,num){
+           //获取商品数量,单价
+            var trjq = $(e).parent().parent();
+            var price = parseFloat(trjq.children("td:eq(1)").text());
+            var count =parseFloat(trjq.children("td:eq(2)").text());
+            alert(count);
+            //1、商品数量增加 2、计算小计
+            count += num;
+            //商品数量不能为负
+            if (count < 0){
+                price = 0;
+                count = 0;
+            } else{
+                //计算合计
+                totalPrice += num * price
+                //更新到表格中
+                $(trjq.children("td:eq(2)").text(count));//数量
+                $(trjq.children("td:eq(3)").text((count*price)));//小计
+                $("#total").text(totalPrice);//总计
+            }
+        }
+        //删除
+        function removetr(e) {
+            //删除当前行
+            $(e).parent().parent().remove();
+            //修改总计：1、获取到小计  2、总计减去小计
+            totalPrice -= parseFloat($(e).parent().prev().text());
+            //更新到表格
+            $("#total").text(totalPrice);
+        }
+    </script>
+    <style>
+        table, tr, td {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+<div class="products">
+    <table>
+        <thead>
+        <tr>
+            <th>商品名称</th>
+            <th>商品单价</th>
+            <th>商品数量</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>鼠标</td>
+            <td>80.0</td>
+            <td><input id="mouseCount" type="text"></td>
+            <td><button id="btn1">+</button></td>
+        </tr>
+        <tr>
+            <td>键盘</td>
+            <td>180.0</td>
+            <td><input id="keyboardCount" type="text"></td>
+            <td><button id="btn2">+</button></td>
+        </tr>
+        <tr>
+            <td>显示器</td>
+            <td>1800.0</td>
+            <td><input id="displayCount" type="text"></td>
+            <td><button id="btn3">+</button></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="cart">
+    <table>
+        <thead>
+        <tr>
+            <th>商品名称</th>
+            <th>商品单价</th>
+            <th>商品数量</th>
+            <th>小计</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody id="cartBody">
+        <!---->
+        </tbody>
+        <tfoot>
+        <tr>
+            <td>合计</td>
+            <td id="total" colspan="4">0</td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+</body>
+</html>

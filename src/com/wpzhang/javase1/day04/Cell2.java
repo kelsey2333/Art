@@ -5,9 +5,6 @@
  */
 package com.wpzhang.javase1.day04;
 
-import com.wpzhang.javase1.day02.Cell;
-import org.junit.Test;
-
 /**
  * @program: Wpzhang
  * @description: Cell测试

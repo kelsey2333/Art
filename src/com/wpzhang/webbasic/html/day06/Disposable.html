@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>一次性定时器</title>
+    <script>
+        /*1、window.setTimeout("alert('hello')",3000)*/
+        /*
+        2、window.setTimeout("alert(func,3000)
+            function func(){alert("hello");}
+        */
+        function func() {
+            alert("hello");
+        }
+    </script>
+</head>
+<body>
+    <button onclick="setTimeout(func,3000);">提示信息</button>
+</body>
+</html>

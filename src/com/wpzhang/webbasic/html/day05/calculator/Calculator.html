@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>简单计算器</title>
+    <style>
+        .container{
+            border: 1px solid #ccc;
+            border:none;
+            height:448px;
+            width:437px;
+            background-image: url("images/bg.png");
+        }
+        .btn_container{
+            height:350px;
+            text-align: center;
+            border: 1px solid;
+            border: none;
+            position: relative;
+            top:105px;
+
+        }
+        /*仪表盘*/
+        .dashBoard{
+            position:absolute;
+            background-color: white;
+            font-size: 30px;
+            border: 1px solid black;
+            border: none;
+            left: 20px;
+            top: 20px;
+            width:410px;
+            height: 65px;
+        }
+        .row1,.row2,.row3,.row4,.row5{
+            height: 70px;
+            text-align: center;
+        }
+        button{
+            height: 44px;
+            width: 94px;
+            /*字体大小加粗*/
+            font-size: 20px;
+            color: white;
+            font-weight: bolder;
+            margin: 0px;
+            padding: 0px;
+            outline:none;
+            border:none;
+            background-image: url("images/b1.gif");
+        }
+        button:active{
+            /*激活时实现背景上下的跳动*/
+            background:url("images/b1.gif")0px 45px;
+        }
+    </style>
+    <script>
+        /*将文字等内容显示到仪表盘上*/
+        function getVal(val) {
+            document.getElementById("dashBoard").value += val;
+        }
+        /*清屏*/
+        function clearBoard() {
+            document.getElementById("dashBoard").value  = "";
+        }
+        /*回退功能*/
+        function backBoard(){
+            var str = document.getElementById("dashBoard").value;
+            document.getElementById("dashBoard").value = str.substring(0,str.length - 1);
+        }
+        /*=计算功能*/
+        function calculate(){
+            var str = document.getElementById("dashBoard").value;
+            if (str){
+                //如果dashBoard不为空则进行计算
+               var result = eval(str);
+               document.getElementById("dashBoard").value = result;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <input id="dashBoard" class="dashBoard" type="text" readonly>
+        <div class="btn_container">
+            <div class="row1">
+                <button onclick="backBoard()">back</button>
+                <button onclick="clearBoard()">empty</button>
+                <button onclick="getVal('(')">(</button>
+                <button onclick="getVal(')')">)</button>
+            </div>
+            <div class="row2">
+                <button onclick="getVal('7')">7</button>
+                <button onclick="getVal('8')">8</button>
+                <button onclick="getVal('9')">9</button>
+                <button onclick="getVal('+')">+</button>
+            </div>
+            <div class="row3">
+                <button onclick="getVal('4')">4</button>
+                <button onclick="getVal('5')">5</button>
+                <button onclick="getVal('6')">6</button>
+                <button onclick="getVal('-')">-</button>
+            </div>
+            <div class="row4">
+                <button onclick="getVal('1')">1</button>
+                <button onclick="getVal('2')">2</button>
+                <button onclick="getVal('3')">3</button>
+                <button onclick="getVal('*')">*</button>
+            </div>
+            <div class="row5">
+                <button onclick="getVal('0')">0</button>
+                <button onclick="getVal('-')">-</button>
+                <button onclick="calculate();">=</button>
+                <button onclick="getVal('/')">/</button>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+</html>

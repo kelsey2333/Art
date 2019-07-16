@@ -5,7 +5,6 @@
  */
 package com.wpzhang.javase1.day01.homework;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.junit.Test;
 
 /**

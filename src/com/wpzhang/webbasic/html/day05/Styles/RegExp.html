@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>正则匹配</title>
+    <script>
+        function regExp() {
+            //创建RegExp对象方式
+            var reg1 = /^\d{3,6}$/;
+            var reg2 = new RegExp("^\d{3,6}$");
+            /*
+            RegExp常用方法:
+            1、RegExpObject.test(string):
+            如果字符串string中含有与RegExpObject匹配的文本，
+            返回true，否则返回false
+            2、reg.exec(str)检索字符串中指定的值，返回true或false
+             */
+            var name="a！aa";
+            var reg = new RegExp("^[0-9a-zA-Z]{3,6}$");
+            var isRight = reg.test(name);
+            if (!isRight){
+                alert("录入错误！");
+            }else{
+                alert("录入成功！")
+            }
+            //String对象与正则表达式
+            var str1 = "abc123def";
+            //返回替换后的结果  abc***def
+            alert(str1.replace(/\d/gi,"*"));
+            //返回匹配的字符串数组  1,2,3
+            alert(str1.match(/\d/g));
+            //返回匹配字符串的首字符位置索引  3
+            alert(str1.search(/\d/g));
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="正则匹配" onclick="regExp();">
+
+</body>
+</html>

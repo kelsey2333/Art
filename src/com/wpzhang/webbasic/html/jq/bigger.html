@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dom对象修改元素属性样式</title>
+    <style>
+    </style>
+    <script src="jquery-1.4.3.js"></script>
+    <script>
+        function modifyFontSize(s) {
+            // 获取d1字体大小
+            // var fontSizeStr = document.getElementById("d1").style.fontSize;
+            // // 字体大小加一个像素点
+            // var index = fontSizeStr.indexOf("px");  // 2
+            //
+            // var size = parseInt(fontSizeStr.substring(0 , index)) + s ;
+            //
+            // // 修改div的fontSize属性
+            // document.getElementById("d1").style.fontSize = size + "px";
+            //获取当前字体大小
+            //使用jq选中元素
+
+            var myNewObj = $(myObj);
+            myNewObj.parent().prev().text();
+
+
+
+            $("#d1").css("font-size","32px");
+            alert($("#d1").css("font-size"));
+        }
+    </script>
+</head>
+<body>
+
+<div id="d1" style="font-size: 1px;">
+    鬼吹灯
+    从零开始
+    星辰变
+    诛仙
+    ...
+</div>
+<button onclick="modifyFontSize(1)">+</button>
+<button onclick="modifyFontSize(-1);">-</button>
+
+</body>
+</html>

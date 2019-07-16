@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>周期性定时器</title>
+    <script>
+        //1、 window.setInterval("alert('hello')",3000);
+        //2、window.setInterval(func,3000);
+        // function func() {
+        //     alert("hello");
+        // }
+        function getTime() {
+
+            var now = new Date();
+            document.getElementById("text1").value = now.toLocaleTimeString();
+        }
+        function startTimer() {
+            timerID = setInterval(getTime,1000);
+        }
+        function stopTimer() {
+            clearInterval(timerID);
+        }
+    </script>
+</head>
+<body>
+    <h1>定时器</h1>
+    <input id="text1" type="text" ><button onclick="getTime();">刷新时间</button>
+    <br>
+    <button onclick="startTimer();">开启定时器</button>
+    <button onclick="stopTimer();">关闭定时器</button>
+</body>
+</html>

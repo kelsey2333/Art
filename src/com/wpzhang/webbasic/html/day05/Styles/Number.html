@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Number对象的常用方法</title>
+    <script>
+        function NumToString() {
+            var data = 23.456789;
+            alert("舍去到2位："+data.toFixed(2));
+            data = 23.5;
+            alert("补足到2位："+ data.toFixed(2));
+        }
+    </script>
+</head>
+<body>
+    <input type="button"value="转换成字符串" onclick="NumToString();">
+</body>
+</html>

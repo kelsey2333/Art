@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>表格</title>
+</head>
+<body>
+    <head>表格 table</head>
+    <pre>
+        1.表格作用，用来显示数据
+        2.table相当于一个表格
+        3.table标签中使用tr声明表格包含多少行，一个tr代表一行
+        4.在tr中声明td,指定每一行有多少个单元格（有多少列）
+    </pre>
+    <p>
+        table属性
+            border:设置表格边框
+            width/height:设置表格宽高
+            align:设置表格对齐方式：left/right/center
+            cellpadding:设置单元格边框和文本内容间的间距
+            callspacing:设置单元格和单元格之间的间距
+        tr:
+            align:设置每一行的文本水平排列方式 left/right/center
+            valign:设置每一行中的文本垂直排列方式
+        td:在tr中声明td
+    </p>
+<table border="1"width="500px"height="300px"
+       align="center";
+       cellpadding="10px"
+       cellspacing="o">
+        <tr align="center"valign="center">
+            <td rowspan="6">java12</td>
+            <td>姓名</td>
+            <td>年龄</td>
+            <td>性别</td>
+            <td>薪资</td>
+        </tr>
+        <tr>
+            <td>mlsong</td>
+            <td>18</td>
+            <td>man</td>
+            <td>大佬级别</td>
+        </tr>
+        <tr>
+            <td>wpzhang</td>
+            <td>23</td>
+            <td>girl</td>
+            <td>菜鸟级别</td>
+        </tr>
+        <tr>
+            <td>pzhang</td>
+            <td>25</td>
+            <td>girl</td>
+            <td>菜鸟级别</td>
+        </tr>
+        <tr>
+            <td>xlyu</td>
+            <td>23</td>
+            <td>boy</td>
+            <td>进军程序员级别</td>
+        </tr>
+        <tr>
+            <td>jysu</td>
+            <td>24</td>
+            <td>boy</td>
+            <td>进军程序员级别</td>
+        </tr>
+</table>
+</body>
+
+</html>

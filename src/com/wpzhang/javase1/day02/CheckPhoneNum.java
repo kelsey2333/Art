@@ -5,6 +5,8 @@
  */
 package com.wpzhang.javase1.day02;
 
+import org.junit.Test;
+
 /**
  * @program: Wpzhang
  * @description: 验证手机号码
@@ -32,5 +34,10 @@ public class CheckPhoneNum {
             System.out.println(pat1 + "是非法手机号码");
         }
     }
-
+    @Test
+    public void areaCodeNum(){
+        //\\+匹配“+”，86和0086要和不要都可以，\\s空格要和不要都可以，\\d{11}11个数字
+        String areaCodeNum = "(\\+86|0086)?\\s?\\d{11}";
+        System.out.println("+8618325658880".matches(areaCodeNum));
+    }
 }

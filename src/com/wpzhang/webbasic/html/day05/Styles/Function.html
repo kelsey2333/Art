@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Function创建函数</title>
+    <script>
+        //1、 使用Function对象直接创建
+        function createMethod() {
+            var  add= new Function("x","y","return(x+y);");
+            var result = add(2,3);
+            //2+“a”:2a
+            //2+undefine:NaN
+            //2+null:2
+            alert(result);//5
+            alert(add);//弹出文本：方法
+        }
+        //2、创建匿名函数
+        var add = function(x,y) {
+            return x + y;
+        };
+        var result = add(2,4)
+        alert(result);//6
+        alert(add);//弹出方法文本
+    </script>
+</head>
+<body>
+    <button onclick="createMethod();">创建的函数输出结果</button>
+</body>
+</html>

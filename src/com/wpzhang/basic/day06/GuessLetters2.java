@@ -18,39 +18,53 @@ import java.util.logging.Level;
 public class GuessLetters2 {
     public static char[] generate(int level) {
         char[] arr = new char[level];
-        char[] letters= {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O',
-        'P','Q','R','S','T','U','V','W','X','Y','Z'};
+        char[] letters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
+                'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
         for (int i = 0; i < arr.length; i++) {
-            //将letters里的level个任意字母赋给arr
+            //遍历数组，给数组元素随机赋值，赋level个值
             int index = (int) (Math.random() * (level + 1));
-        }//返回数组arr
+            arr[i]=letters[index];
+        }//返回数组
         return arr;
     }
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("请输入游戏等级：");
+        System.out.println("请输入等级：");
         int level = scan.nextInt();
         char[] arr = generate(level);
-        System.out.println(Arrays.toString(generate(level)));
-        //接受用户输入的字母
+        System.out.println(arr);
         Scanner scan2 = new Scanner(System.in);
-        System.out.println("请输入字母：");
+        System.out.println("请输入"+level+"个字母");
         String input = scan.next();
-        //字符转换为字符数组
+        System.out.println(input);
         char[] arr2 = input.toCharArray();
-        System.out.println(Arrays.toString(arr2));
-        //比较用户输入字母与指定字母
-        int count=0;
-        for (int i =0;i<arr.length;i++){
-            for (int j =0 ; j<arr2.length;j++) {
-                if (arr[i] == arr2[j]) {
-                    count++;
+        int count = 0;
+        char[] chars=new char[arr.length];
+        int index=0;
+        for (int i = 0; i < arr2.length; i++) {
+            for (int j = 0; j < arr.length; j++) {
+                if (arr2[i]==arr[j]) {
+                    chars=dropArrays(arr, arr[j]);
+                    break;
                 }
             }
-        }System.out.println("你只答对了"+count+"个字母，继续加油！");
+            arr=chars;
+        }
+        System.out.println("您只答对了  " + (level-arr.length) + "个字母");
 
     }
+    public static char[ ] dropArrays(char[] chars,char c) {
+        char[] c1 = new char[chars.length - 1];
+        int index = 0;
+        for (char d : chars) {
+            if (d == c) {
+                continue;
+            }
+            c1[index] = (char) d;
+            index++;
+        }
+        return c1;
 
-
+    }
 }

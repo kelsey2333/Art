@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>伪类选择器</title>
+    <style>
+        /*所有超链接被选中（激活）之前的样式*/
+        a:link{
+            color:green;
+        }
+        /*所有超链接被选中（激活）之后的样式*/
+        a:visited{
+            color:purple;
+        }
+        /*按钮被激活的样式*/
+        button:active{
+            color:red;
+        }
+        /*悬停样式*/
+        #d2:hover{
+            background-color:silver;
+        }
+        /*聚焦样式*/
+        .txt:focus{
+            background-color:blue;
+        }
+
+    </style>
+
+
+</head>
+<body>
+    <h1>默认超链接</h1>
+    <a href="http://www.baidu.com">百度一下，你就知道</a>
+
+    <h1>按钮添加激活样式\</h1>
+    <button>普通按钮</button>
+
+    <!--相当于把以前点击“百度一下你就知道”改成了点击按钮“普通按钮”-->
+    <h1>激活按钮</h1>
+    <a href="http://www.baidu.com"><button>普通按钮</button></a>
+
+    <div id="d2">悬停</div>
+
+    <h1>聚焦</h1>
+    <input type="text"class="txt"/>
+
+
+</body>
+</html>

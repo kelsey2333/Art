@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>使用js的三种方式</title>
+    <script>
+        function method1() {
+            alert("Hello world!!")
+        }
+    </script>
+    <script src="myJs.js"></script>
+</head>
+<body>
+    <!--事件定义式-->
+    <input type="button" value="按钮1" onclick="alert('Hello world!')">
+    <!--嵌入式-->
+    <input type="button" value="按钮2" onclick="method1();">
+    <!--文件调用式-->
+    <input type="button" value="按钮3" onclick="method2()">
+</body>
+</html>

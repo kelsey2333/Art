@@ -12,6 +12,7 @@ package com.wpzhang.oop.day03;
  * @create: 2019-03-14 16:34
  **/
 public class TetrominoO extends Tetromino {
+    //O型要有一个自己的构造器
     public TetrominoO(int row, int col) {
         cells[0] = new Cell(row, col);
         cells[1] = new Cell(row, col + 1);

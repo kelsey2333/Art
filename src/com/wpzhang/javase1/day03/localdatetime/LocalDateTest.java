@@ -166,7 +166,7 @@ public class LocalDateTest {
 
     /**
      * @return void
-     * @Param TODO 用Calendar 很麻烦
+     * @Param
      * @description 取2019年1月第一个周一
      * @date 2019/3/31 10:04
      */
@@ -180,9 +180,11 @@ public class LocalDateTest {
     public void testCalendar() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, 2019);
-        calendar.set(Calendar.MONTH, Calendar.JANUARY);
+       calendar.set(Calendar.MONTH, Calendar.JANUARY);
         //第一个月的第一周的第一天（周日）的日期
         calendar.set(Calendar.DAY_OF_WEEK_IN_MONTH, 0);
+//       System.out.println(calendar.getTime());
+
     /*
     首先判断第一个月的第一周的第一天该日期年的分量是否为2019，若是则输出下一天
     若不是则将日的分量加1然后是否是2019年

@@ -20,55 +20,96 @@ import java.util.Set;
  * @create: 2019-04-02 19:33
  **/
 public class MapTest {
-    @Test
-    public void testPut() {
-        java.util.Map<String, User> users = new HashMap<String, User>();
-        //向map中添加元素：元素包括key value
-        users.put("YOU", new User(23));
-        users.put("ME", new User(24));
-        users.put("HE", new User(25));
-        users.put("SHE", new User(27));
-        System.out.println(users);
-        //取出map中的元素
-        User letters = users.get("b");
-        System.out.println(letters);
-        //判断map中是否包含指定的key值：用containsKey方法
-        System.out.println(users.containsKey("c"));
-    }
-        /**
-         * @Param
-         * @description 测试keySet
-         * @date 2019/4/2 20:14
-         * @return void
-         */
-        @Test
-        public void keySet(){
-          Map<String , User> users = new HashMap<String,User>();
-          //这里离给map接口定义的集合中添加元素get相当于add
-          users.put("YOU",new User(24));
-          users.put("ME",new User(29));
-          users.put("HE",new User(28));
-          users.put("SHE",new User(25));
-          //获取map中所有的key值
-            Set<String> keys = users.keySet();
-            //遍历keys集合
-            for (String key:keys){
-                System.out.println(key);
-            }
-        }
-        /**
-         * @Param
-         * @description 遍历map中的所有key值
-         * @date2019/4/2 20:24
-         * @return  void
-         */
-        public void entrySet(){
-            Map<String , User> users = new HashMap<String, User>();
-            users.put("YOU",new User(26));
-            users.put("ME",new User(25));
-            users.put("HE ",new User(24));
-            users.put("SHE",new User(23));
+    /**
+     * @return void
+     * @Param
+     * @descriptionMap查找表
+     * @date 2019/4/2 20:14
+     */
 
+    @Test
+    public void testMap() {
+        Map<String, User> users = new HashMap<String, User>();
+        users.put("YOU", new User(26));
+        users.put("ME", new User(25));
+        users.put("HE ", new User(24));
+        users.put("SHE", new User(23));
+
+        System.out.println(users);
+        //取出map集合中的元素
+        //V get(Object key)
+        User me = users.get("ME");
+        System.out.println(me);
+        if (users.containsKey("HE")) {
+            System.out.println("包含");
+        } else {
+            System.out.println("不包含");
         }
+    }
+
+    /**
+     * @return void
+     * @Param
+     * @description map集合遍历  keySet()
+     * @date 2019/4/3 15:12
+     */
+    @Test
+    public void keySet() {
+        Map<String, User> users = new HashMap<String, User>();
+        users.put("YOU", new User(26));
+        users.put("ME", new User(25));
+        users.put("HE ", new User(24));
+        users.put("SHE", new User(23));
+        Set<String> keys = users.keySet();
+        for (String key : keys) {
+            System.out.println(key);
+        }
+    }
+
+    /**
+     * @return void
+     * @Param
+     * @description 遍历map集合   entrySet()
+     * @date 2019/4/3 15:22
+     */
+    @Test
+    public void entrySet() {
+        Map<String, User> users = new HashMap<String, User>();
+        users.put("YOU", new User(26));
+        users.put("ME", new User(25));
+        users.put("HE ", new User(24));
+        users.put("SHE", new User(23));
+        Set<Map.Entry<String,User>> entrySet = users.entrySet();
+        for (Map.Entry<String,User>entry:entrySet){
+            System.out.println(entry.getKey()+":"+entry.getValue());
+        }
+    }
+
+    /**
+     * @return
+     * @Param
+     * @description 遍历key和Value值
+     * @date 2019/4/3 15:49
+     */
+
+    @Test
+    public void value() {
+        Map<String, User> users = new HashMap<String, User>();
+        users.put("YOU", new User(26));
+        users.put("ME", new User(25));
+        users.put("HE ", new User(24));
+        users.put("SHE", new User(23));
+        //遍历String类型的key值
+        Set<String>key = users.keySet();
+        for (String keys:key){
+            System.out.println(keys);
+        }
+        //遍历Entry集合
+        Set<Map.Entry<String,User>>entrySet = users.entrySet();
+        for (Map.Entry<String,User>entry:entrySet){
+            System.out.println(entry);
+        }
+
+    }
 
 }
